@@ -1,0 +1,19 @@
+<launch>
+  
+  <!-- For terminal (human) reading -->
+  <env name="ROSCONSOLE_FORMAT" value="${message}"/>
+  
+  <!-- Essential parameters -->
+  <param name="rt1a3_action_timeout" type="double" value="60.0"/>
+  <param name="rt1a3_brake_threshold" type="double" value="1.0"/>
+
+  <!-- Essential Nodes -->
+  <node name="first_ui" pkg="rt2_first_assignment"
+    type="first_ui" required="false" output="screen" launch-prefix="xterm -e"/>
+  
+
+  <node name="first_controller" pkg="rt2_first_assignment" output="screen" launch-prefix="xterm -e"
+    type="first_controller"  />
+    
+   
+</launch>
