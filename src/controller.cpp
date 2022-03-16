@@ -1,4 +1,38 @@
+/**
+* \file controller.cpp
+* \brief Controller for the mobile robot simulation in rviz and Gazebo
+* \author Mattia Piras
+* \version 0.1
+* \date 14/03/2022
 
+* \param [in] rt1a3_action_timeout Define the time interval within the action can finish. Otherwise an error occurs
+* \param [in] rt1a3_brake_threshold Define the minum distance which the robot has to be considered in a safe zone from.
+*
+*
+* Subscribes to: <BR>
+* ° /subCmdVelRemapped
+* ° /subScanner
+* ° /subMode
+*
+* Publishes to: <BR>
+* ° /pubStateInfo 
+* ° /pubCmdVel 
+* ° /pubTimeout 
+*
+* Services : <BR>
+* ° /service_mode 
+* ° /service_goal 
+*
+* Description :
+*
+* This node simulates a mobile robot inside an environment. The User has the possibility play with the simulation in three ways:
+* The first is letting the robot drive towards a goal that he/her has inserted at the beginning of the simulation. In this case 
+* the user can cancel the goal by pressing a button
+* The second way is letting the user guiding the robot vua keyboard
+* The third one is related to the second but with the difference that the user is assisted during the controlling of the robot, so certain directions are not allowed (e.g. because of a wall)
+*
+*/
+**/
 
 #include "ros/ros.h"
 #include <unistd.h>
@@ -34,18 +68,19 @@
 #include <ros/callback_queue.h>
 
 
-const int TEXT_DELAY = 25000; // microseconds
-double actionTimeout;
-double brakethreshold;
-//ros::Timer timeoutTimer;
+const int TEXT_DELAY = 25000; ///< World time interval for complete our action in reaching the goal
+double actionTimeout;         ///< temporal variable for setting the parameter server variable of the time interval for the complition of the action.
+double brakethreshold;        ///< temporal variable for setting the parameter server variable of the minimal distances from the wall.
 
-move_base_msgs::MoveBaseGoal goal;
-//std::chrono::high_resolution_clock::time_point time_start;  
-//std::chrono::high_resolution_clock::time_point time_end;
+
+move_base_msgs::MoveBaseGoal goal; ///< topic which to publish for setting our goal to
 
 
 
-// Represents MINIMUM distances of obstacles around the robot
+/** 
+* \brief A structure representing the MINIMUM distances of obstacles around the robot.
+*
+*/
 struct minDistances {
   float left;
   float right;
@@ -109,8 +144,11 @@ ControllerClass::ControllerClass(ros::NodeHandle* nodehandle, ros::NodeHandle* n
 //DISTRUCTOR
 ControllerClass::~ControllerClass() { ros::shutdown(); }
 
+/**
+* \brief Call back of the sendGoal for when the goal is reached
+*
+*/
 
-//Call back of the sendGoal for when the goal is reached
 void ControllerClass::doneCb(const actionlib::SimpleClientGoalState& state,const move_base_msgs::MoveBaseResultConstPtr& result)
   {
    
@@ -138,8 +176,10 @@ void ControllerClass::activeCb()
   }
   
   
+/**
+* \brief Function for when the robot is approching the goal
+*/
 
-//Function for when the robot is approching the goal
 void ControllerClass::feedbackCb(const move_base_msgs::MoveBaseFeedback::ConstPtr&  msg) {
  
      currentpose_x = msg->base_position.pose.position.x;
@@ -156,7 +196,10 @@ void ControllerClass::feedbackCb(const move_base_msgs::MoveBaseFeedback::ConstPt
    
     }
 
-//For checking the timer and telling the user if it is expired or not by publishing a topic
+/**
+* \brief Function for checking the timer and telling the user if it is expired or not by publishing a topic
+*/
+
 bool ControllerClass::check_timeout(){
         std_msgs::Bool time;
 	
@@ -174,8 +217,10 @@ bool ControllerClass::check_timeout(){
 
 }
 
+/**
+* \brief Callback of the service to set goal
+*/
 
-//service to set goal
 bool ControllerClass::set_goal(rt2_first_assignment::Set_goal_service::Request  &req, rt2_first_assignment::Set_goal_service::Response &res){
 	
 	std::string req_strX;
@@ -202,8 +247,10 @@ bool ControllerClass::set_goal(rt2_first_assignment::Set_goal_service::Request  
 	return true;
 }
 
+/**
+* \brief Callback of the service to change driving mode
+*/
 
-//service to change mode
 bool ControllerClass::switch_mode(rt2_first_assignment::Change_mode_service::Request& req, rt2_first_assignment::Change_mode_service::Response& res){
    
   
@@ -224,8 +271,8 @@ bool ControllerClass::switch_mode(rt2_first_assignment::Change_mode_service::Req
    }
    
 
-/*
-* Manual drving
+/**
+* \brief Function for setting the manual driving, after the choice of th user
 */
 void ControllerClass::manualDriving(){
 	char input_assisted;
@@ -251,10 +298,12 @@ void ControllerClass::manualDriving(){
  }
  
 
-/*
-*function for handle the autonomous mode.
+/**
+* \brief Function for setting the autonomous driving, after the choice of th user.
+
 * After having set the parameter the action client set a goal with the user input
-* and send this goal to the server in order to process it a starting the movement of the robot
+* and send this goal to the server in order to have this processed and start the movement of the robot
+* 
 */	
 void ControllerClass::autonomousDriving(){
      
@@ -334,7 +383,7 @@ void ControllerClass::autonomousDriving(){
                 	
  
  /*
- * Callback for detecting obstacles from the laser on the board of teh robot
+ * \brief Callback for detecting obstacles from the laser on the board of teh robot
  */   
 void ControllerClass::LaserScanParserCallBack(const sensor_msgs::LaserScan::ConstPtr& scaninfo) {
  	const int NUM_SECTORS = 2;
@@ -373,8 +422,10 @@ void ControllerClass::LaserScanParserCallBack(const sensor_msgs::LaserScan::Cons
   	
 }
 
-/*
-* Function called in assisted mode 
+/**
+* \brief Function called in assisted mode
+
+* This function perform a simple collision avoidance when assisted mode is activated. This helps the user not to insert a velocity that is in a wall direction. Besides, let the user to decide if exit the * * simulation or tio disable the assisted mode
 */
 void ControllerClass::collisionAvoidance() {
 	manual = false;
@@ -428,8 +479,10 @@ void ControllerClass::collisionAvoidance() {
   	
 }
 
-/*
-* Function for modify the velocity that will be usefull for the collision avoidance
+/**
+* \brief Function for modify the velocity 
+
+* It will be usefull for the collision avoidance
 * VelFromTeleop will be modified only if assisted is true
 */
 void ControllerClass::UserDriveCallBack(const geometry_msgs::Twist::ConstPtr& msg) {
@@ -447,8 +500,8 @@ void ControllerClass::UserDriveCallBack(const geometry_msgs::Twist::ConstPtr& ms
   	
 }
 
-/*
-* Function for handling the completeness of the action or the timeout of the same
+/**
+* \brief Function for handling the completeness of the action or its timeout 
 */
 
 void ControllerClass::sendInfo(bool temp){
@@ -466,9 +519,10 @@ void ControllerClass::sendInfo(bool temp){
 	
 
 
-/*
-* Function for canceling the goal by subscribing to a specific topic.
-* it depends on the input from the user
+/**
+* \brief Function for canceling the goal
+
+* By subscribing to a specific topic the function reads if the user has decided to cancel the goal.
 */
 void ControllerClass::CancelCallBack(const std_msgs::String &msg){
     
@@ -484,8 +538,8 @@ void ControllerClass::CancelCallBack(const std_msgs::String &msg){
     
 }
 
-/*
-*Starting Function for handling the program
+/**
+* \brief Starting Function for handling the entire simulation
 */
 void ControllerClass::mode_choice(){
 	if(!node_handle.hasParam("rt1a3_action_timeout")){
@@ -510,6 +564,8 @@ void ControllerClass::mode_choice(){
 
 
 }
+
+
 int main(int argc, char **argv) {
   // Init ROS node
   ros::init(argc, argv, "first_controller");

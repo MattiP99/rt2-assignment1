@@ -1,3 +1,38 @@
+/**
+* \file ui.cpp
+* \brief User Interface for the mobile robot simulation in rviz and Gazebo
+* \author Mattia Piras
+* \version 0.1
+* \date 14/03/2022
+
+* \param [in] rt1a3_action_timeout Define the time interval within the action can finish. Otherwise an error occurs
+* \param [in] rt1a3_brake_threshold Define the minum distance which the robot has to be considered in a safe zone from.
+*
+*
+* Subscribes to: <BR>
+* ° /subStateInfo
+* ° /timeout
+* 
+*
+* Publishes to: <BR>
+* ° /pub_cancel 
+* ° /pub_mode 
+*
+* Services : <BR>
+* ° /service_mode 
+* ° /service_goal 
+*
+* Description :
+*
+* This node is in charge for the user interface. The User has the possibility play with the simulation in three ways:
+* The first is letting the robot drive towards a goal that he/her has inserted at the beginning of the simulation. In this case 
+* the user can cancel the goal by pressing a button
+* The second way is letting the user guiding the robot vua keyboard
+* The third one is related to the second but with the difference that the user is assisted during the controlling of the robot, so certain directions are not allowed (e.g. because of a wall)
+*
+*/
+**/
+
 #include "ros/ros.h"
 #include <unistd.h>
 #include <termios.h>
@@ -31,8 +66,8 @@
 #include <ros/callback_queue.h>
 
 const int TEXT_DELAY = 25000; // microseconds
-rt2_first_assignment::Set_goal_service goal_srv;
-rt2_first_assignment::Change_mode_service mode_srv;
+rt2_first_assignment::Set_goal_service goal_srv;     ///< our service instance for setting the goal
+rt2_first_assignment::Change_mode_service mode_srv;  ///< our service instance for changing the driving mode
 
 
 UserClass::UserClass(ros::NodeHandle* nodehandle): node_handle(*nodehandle){
@@ -75,9 +110,11 @@ UserClass::UserClass(ros::NodeHandle* nodehandle): node_handle(*nodehandle){
 UserClass::~UserClass() { ros::shutdown();}
 
 
-/*
-* function for receiving the result
-* true if it is complete, false for timeout
+/**
+* \brief Function for receiving the result
+
+*
+* info-> data is true if the action is complete, false for telling the user that the time is expired.
 */
 void UserClass::receiveStateInfo(const std_msgs::Bool::ConstPtr& info){
 
@@ -101,8 +138,8 @@ void UserClass::receiveStateInfo(const std_msgs::Bool::ConstPtr& info){
  
 } 
 
-/*
-* Starting function for receiving input from the user
+/**
+* \brief Starting function for evaluating the input from the user
 */
 int UserClass::mode_choice(){
   
@@ -248,8 +285,8 @@ int UserClass::mode_choice(){
 }
 
 
-/*
-* function for sending the cancel command via a publisher
+/**
+* \brief Function for sending the cancel command via a publisher
 */
 void UserClass::cancelGoal () {
   char inputStr;
@@ -295,7 +332,9 @@ void UserClass::cancelGoal () {
   
 
 
-
+/**
+* \brief Function for getting the user input
+*/
 int UserClass::getUserChoice () {
   std::string s;
   clearTerminal();
@@ -313,7 +352,9 @@ int UserClass::getUserChoice () {
   return inputChoice;
 }
  
-// subscribing to a topic for checking the timeout 	
+/**
+*\brief Callback for a subscription to a topic for checking the timeout 
+*/	
 void UserClass::timeoutTimerCallback(const std_msgs::Bool::ConstPtr& timeout){
 	isTimeout = timeout->data;
 }  

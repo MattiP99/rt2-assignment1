@@ -1,0 +1,109 @@
+\hypertarget{controller_8cpp}{}\doxysection{src/controller.cpp File Reference}
+\label{controller_8cpp}\index{src/controller.cpp@{src/controller.cpp}}
+
+
+Controller for the mobile robot simulation in rviz and Gazebo.  
+
+
+{\ttfamily \#include \char`\"{}ros/ros.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$termios.\+h$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}rt2\+\_\+first\+\_\+assignment/utils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}rt2\+\_\+first\+\_\+assignment/controller\+\_\+class.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$actionlib/client/simple\+\_\+action\+\_\+client.\+h$>$}\newline
+{\ttfamily \#include $<$actionlib/client/terminal\+\_\+state.\+h$>$}\newline
+{\ttfamily \#include $<$actionlib\+\_\+msgs/\+Goal\+I\+D.\+h$>$}\newline
+{\ttfamily \#include $<$move\+\_\+base\+\_\+msgs/\+Move\+Base\+Action.\+h$>$}\newline
+{\ttfamily \#include $<$move\+\_\+base\+\_\+msgs/\+Move\+Base\+Feedback.\+h$>$}\newline
+{\ttfamily \#include $<$move\+\_\+base\+\_\+msgs/\+Move\+Base\+Action\+Goal.\+h$>$}\newline
+{\ttfamily \#include $<$move\+\_\+base\+\_\+msgs/\+Move\+Base\+Action\+Feedback.\+h$>$}\newline
+{\ttfamily \#include $<$boost/bind.\+hpp$>$}\newline
+{\ttfamily \#include \char`\"{}rt2\+\_\+first\+\_\+assignment/\+Change\+\_\+mode\+\_\+service.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}rt2\+\_\+first\+\_\+assignment/\+Set\+\_\+goal\+\_\+service.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}geometry\+\_\+msgs/\+Point.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}geometry\+\_\+msgs/\+Twist.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sensor\+\_\+msgs/\+Laser\+Scan.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}std\+\_\+msgs/\+Int32.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}std\+\_\+msgs/\+String.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}std\+\_\+msgs/\+Bool.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$std\+\_\+srvs/\+Set\+Bool.\+h$>$}\newline
+{\ttfamily \#include $<$ros/callback\+\_\+queue.\+h$>$}\newline
+Include dependency graph for controller.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{controller_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structmin_distances}{min\+Distances}}
+\begin{DoxyCompactList}\small\item\em A structure representing the M\+I\+N\+I\+M\+UM distances of obstacles around the robot. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{controller_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{controller_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+int {\bfseries main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{controller_8cpp_acecdd1cee07d3cb74838dcf03e6b6dcc}\label{controller_8cpp_acecdd1cee07d3cb74838dcf03e6b6dcc}} 
+$\ast$$\ast$const int \mbox{\hyperlink{controller_8cpp_acecdd1cee07d3cb74838dcf03e6b6dcc}{T\+E\+X\+T\+\_\+\+D\+E\+L\+AY}} = 25000
+\begin{DoxyCompactList}\small\item\em World time interval for complete our action in reaching the goal. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{controller_8cpp_a94419b818e97f48250e54dc38a7e2052}\label{controller_8cpp_a94419b818e97f48250e54dc38a7e2052}} 
+double \mbox{\hyperlink{controller_8cpp_a94419b818e97f48250e54dc38a7e2052}{action\+Timeout}}
+\begin{DoxyCompactList}\small\item\em temporal variable for setting the parameter server variable of the time interval for the complition of the action. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{controller_8cpp_ae4c4d79c1b4b74f0c25752d8c6e7b316}\label{controller_8cpp_ae4c4d79c1b4b74f0c25752d8c6e7b316}} 
+double \mbox{\hyperlink{controller_8cpp_ae4c4d79c1b4b74f0c25752d8c6e7b316}{brakethreshold}}
+\begin{DoxyCompactList}\small\item\em temporal variable for setting the parameter server variable of the minimal distances from the wall. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{controller_8cpp_abc776906e911f45434d307a992ecf233}\label{controller_8cpp_abc776906e911f45434d307a992ecf233}} 
+move\+\_\+base\+\_\+msgs\+::\+Move\+Base\+Goal \mbox{\hyperlink{controller_8cpp_abc776906e911f45434d307a992ecf233}{goal}}
+\begin{DoxyCompactList}\small\item\em topic which to publish for setting our goal to \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{controller_8cpp_ac59255cfa090da762403f35562541fe8}\label{controller_8cpp_ac59255cfa090da762403f35562541fe8}} 
+const double {\bfseries A\+C\+T\+I\+O\+N\+\_\+\+T\+I\+M\+E\+O\+U\+T\+\_\+\+D\+E\+F\+A\+U\+LT} = 30.\+0
+\item 
+\mbox{\Hypertarget{controller_8cpp_a1727e065c6c73d57999b646fb5849511}\label{controller_8cpp_a1727e065c6c73d57999b646fb5849511}} 
+const double {\bfseries B\+R\+A\+K\+E\+\_\+\+T\+H\+R\+E\+S\+H\+O\+L\+D\+\_\+\+D\+E\+F\+A\+U\+LT} = 1.\+0
+\item 
+\mbox{\Hypertarget{controller_8cpp_afccade0bbf6cd9d0a304da622cd0ead6}\label{controller_8cpp_afccade0bbf6cd9d0a304da622cd0ead6}} 
+const double {\bfseries G\+O\+A\+L\+\_\+\+TH} = 0.\+5
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Controller for the mobile robot simulation in rviz and Gazebo. 
+
+\begin{DoxyAuthor}{Author}
+Mattia Piras 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+14/03/2022
+\end{DoxyDate}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em rt1a3\+\_\+action\+\_\+timeout} & Define the time interval within the action can finish. Otherwise an error occurs \\
+\hline
+\mbox{\texttt{ in}}  & {\em rt1a3\+\_\+brake\+\_\+threshold} & Define the minum distance which the robot has to be considered in a safe zone from.\\
+\hline
+\end{DoxyParams}
+Subscribes to\+: ~\newline
+ ° /sub\+Cmd\+Vel\+Remapped ° /sub\+Scanner ° /sub\+Mode
+
+Publishes to\+: ~\newline
+ ° /pub\+State\+Info ° /pub\+Cmd\+Vel ° /pub\+Timeout
+
+Services \+: ~\newline
+ ° /service\+\_\+mode ° /service\+\_\+goal
+
+Description \+:
+
+This node simulates a mobile robot inside an environment. The User has the possibility play with the simulation in three ways\+: The first is letting the robot drive towards a goal that he/her has inserted at the beginning of the simulation. In this case the user can cancel the goal by pressing a button The second way is letting the user guiding the robot vua keyboard The third one is related to the second but with the difference that the user is assisted during the controlling of the robot, so certain directions are not allowed (e.\+g. because of a wall) 

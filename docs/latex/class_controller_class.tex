@@ -1,0 +1,130 @@
+\hypertarget{class_controller_class}{}\doxysection{Controller\+Class Class Reference}
+\label{class_controller_class}\index{ControllerClass@{ControllerClass}}
+
+
+A class for the mobile robot controller.  
+
+
+
+
+{\ttfamily \#include $<$controller\+\_\+class.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_controller_class_a5b04eeba095f7a04f10c2e03b4244ea6}{Controller\+Class}} (ros\+::\+Node\+Handle $\ast$node\+\_\+handle, ros\+::\+Node\+Handle $\ast$node\+\_\+handle2)
+\begin{DoxyCompactList}\small\item\em A constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_controller_class_a092a3df36744246c6596972aff72172e}\label{class_controller_class_a092a3df36744246c6596972aff72172e}} 
+void \mbox{\hyperlink{class_controller_class_a092a3df36744246c6596972aff72172e}{send\+Info}} (bool temp)
+\begin{DoxyCompactList}\small\item\em Function for handling the completeness of the action or its timeout. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_controller_class_a1d6d32126aaf2be9d3deb81ed79056d0}{User\+Drive\+Call\+Back}} (const geometry\+\_\+msgs\+::\+Twist\+::\+Const\+Ptr \&msg)
+\begin{DoxyCompactList}\small\item\em Function for modify the velocity. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_controller_class_af3f0bd58f36159c3a7d4cb4c2653ba14}{Cancel\+Call\+Back}} (const std\+\_\+msgs\+::\+String \&msg)
+\begin{DoxyCompactList}\small\item\em Function for canceling the goal. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_controller_class_a43204db3ff021a2e4e0ee04bbfe22786}{collision\+Avoidance}} ()
+\begin{DoxyCompactList}\small\item\em Function called in assisted mode. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_controller_class_a77510fcd3f07b31b62a9c964192e77ca}\label{class_controller_class_a77510fcd3f07b31b62a9c964192e77ca}} 
+void {\bfseries Laser\+Scan\+Parser\+Call\+Back} (const sensor\+\_\+msgs\+::\+Laser\+Scan\+::\+Const\+Ptr \&scaninfo)
+\item 
+\mbox{\Hypertarget{class_controller_class_a55e25ed6916cc24758819aa328ab92d4}\label{class_controller_class_a55e25ed6916cc24758819aa328ab92d4}} 
+void \mbox{\hyperlink{class_controller_class_a55e25ed6916cc24758819aa328ab92d4}{mode\+\_\+choice}} ()
+\begin{DoxyCompactList}\small\item\em Starting Function for handling the entire simulation. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_controller_class_a2d03e1c1769294ab187041fab2cb73e2}\label{class_controller_class_a2d03e1c1769294ab187041fab2cb73e2}} 
+void \mbox{\hyperlink{class_controller_class_a2d03e1c1769294ab187041fab2cb73e2}{manual\+Driving}} ()
+\begin{DoxyCompactList}\small\item\em Function for setting the manual driving, after the choice of th user. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_controller_class_a7f5aa97cf74128e5fd7fc235799b0a55}{autonomous\+Driving}} ()
+\begin{DoxyCompactList}\small\item\em Function for setting the autonomous driving, after the choice of th user. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_controller_class_a99edc72ca3a4cd745f8e7ece3b0742f4}\label{class_controller_class_a99edc72ca3a4cd745f8e7ece3b0742f4}} 
+bool \mbox{\hyperlink{class_controller_class_a99edc72ca3a4cd745f8e7ece3b0742f4}{check\+\_\+timeout}} ()
+\begin{DoxyCompactList}\small\item\em Function for checking the timer and telling the user if it is expired or not by publishing a topic. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_controller_class_a555f5f61b1ba4b6e3b574a2ed34c2aab}\label{class_controller_class_a555f5f61b1ba4b6e3b574a2ed34c2aab}} 
+void \mbox{\hyperlink{class_controller_class_a555f5f61b1ba4b6e3b574a2ed34c2aab}{feedback\+Cb}} (const move\+\_\+base\+\_\+msgs\+::\+Move\+Base\+Feedback\+Const\+Ptr \&fb)
+\begin{DoxyCompactList}\small\item\em Function for when the robot is approching the goal. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_controller_class_a591d0791dd009a33e0713ddb72309eaa}{done\+Cb}} (const actionlib\+::\+Simple\+Client\+Goal\+State \&state, const move\+\_\+base\+\_\+msgs\+::\+Move\+Base\+Result\+Const\+Ptr \&result)
+\begin{DoxyCompactList}\small\item\em Call back of the send\+Goal for when the goal is reached. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_controller_class_a5399c688e763ec8968fbe7616ded4400}\label{class_controller_class_a5399c688e763ec8968fbe7616ded4400}} 
+void {\bfseries active\+Cb} ()
+\item 
+\mbox{\Hypertarget{class_controller_class_a7d8aa577541335f6f41c60eace24c8e3}\label{class_controller_class_a7d8aa577541335f6f41c60eace24c8e3}} 
+bool \mbox{\hyperlink{class_controller_class_a7d8aa577541335f6f41c60eace24c8e3}{switch\+\_\+mode}} (rt2\+\_\+first\+\_\+assignment\+::\+Change\+\_\+mode\+\_\+service\+::\+Request \&req, rt2\+\_\+first\+\_\+assignment\+::\+Change\+\_\+mode\+\_\+service\+::\+Response \&res)
+\begin{DoxyCompactList}\small\item\em Callback of the service to change driving mode. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_controller_class_a23f196eea439cac08703880544f36655}\label{class_controller_class_a23f196eea439cac08703880544f36655}} 
+bool \mbox{\hyperlink{class_controller_class_a23f196eea439cac08703880544f36655}{set\+\_\+goal}} (rt2\+\_\+first\+\_\+assignment\+::\+Set\+\_\+goal\+\_\+service\+::\+Request \&req, rt2\+\_\+first\+\_\+assignment\+::\+Set\+\_\+goal\+\_\+service\+::\+Response \&res)
+\begin{DoxyCompactList}\small\item\em Callback of the service to set goal. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class for the mobile robot controller. 
+
+This class implements the controller for our mobile robot. It\textquotesingle{}s aim to contain all the variables and all the function used by the \mbox{\hyperlink{controller_8cpp}{controller.\+cpp}} file 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_controller_class_a5b04eeba095f7a04f10c2e03b4244ea6}\label{class_controller_class_a5b04eeba095f7a04f10c2e03b4244ea6}} 
+\index{ControllerClass@{ControllerClass}!ControllerClass@{ControllerClass}}
+\index{ControllerClass@{ControllerClass}!ControllerClass@{ControllerClass}}
+\doxysubsubsection{\texorpdfstring{ControllerClass()}{ControllerClass()}}
+{\footnotesize\ttfamily Controller\+Class\+::\+Controller\+Class (\begin{DoxyParamCaption}\item[{ros\+::\+Node\+Handle $\ast$}]{node\+\_\+handle,  }\item[{ros\+::\+Node\+Handle $\ast$}]{node\+\_\+handle2 }\end{DoxyParamCaption})}
+
+
+
+A constructor. 
+
+the constructor contains as parameter two node handles in order to manage a second waiting queue for canceling the goal in a more fast way. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_controller_class_a7f5aa97cf74128e5fd7fc235799b0a55}\label{class_controller_class_a7f5aa97cf74128e5fd7fc235799b0a55}} 
+\index{ControllerClass@{ControllerClass}!autonomousDriving@{autonomousDriving}}
+\index{autonomousDriving@{autonomousDriving}!ControllerClass@{ControllerClass}}
+\doxysubsubsection{\texorpdfstring{autonomousDriving()}{autonomousDriving()}}
+{\footnotesize\ttfamily void Controller\+Class\+::autonomous\+Driving (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Function for setting the autonomous driving, after the choice of th user. 
+
+After having set the parameter the action client set a goal with the user input and send this goal to the server in order to have this processed and start the movement of the robot \mbox{\Hypertarget{class_controller_class_af3f0bd58f36159c3a7d4cb4c2653ba14}\label{class_controller_class_af3f0bd58f36159c3a7d4cb4c2653ba14}} 
+\index{ControllerClass@{ControllerClass}!CancelCallBack@{CancelCallBack}}
+\index{CancelCallBack@{CancelCallBack}!ControllerClass@{ControllerClass}}
+\doxysubsubsection{\texorpdfstring{CancelCallBack()}{CancelCallBack()}}
+{\footnotesize\ttfamily void Controller\+Class\+::\+Cancel\+Call\+Back (\begin{DoxyParamCaption}\item[{const std\+\_\+msgs\+::\+String \&}]{msg }\end{DoxyParamCaption})}
+
+
+
+Function for canceling the goal. 
+
+By subscribing to a specific topic the function reads if the user has decided to cancel the goal. \mbox{\Hypertarget{class_controller_class_a43204db3ff021a2e4e0ee04bbfe22786}\label{class_controller_class_a43204db3ff021a2e4e0ee04bbfe22786}} 
+\index{ControllerClass@{ControllerClass}!collisionAvoidance@{collisionAvoidance}}
+\index{collisionAvoidance@{collisionAvoidance}!ControllerClass@{ControllerClass}}
+\doxysubsubsection{\texorpdfstring{collisionAvoidance()}{collisionAvoidance()}}
+{\footnotesize\ttfamily void Controller\+Class\+::collision\+Avoidance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Function called in assisted mode. 
+
+This function perform a simple collision avoidance when assisted mode is activated. This helps the user not to insert a velocity that is in a wall direction. Besides, let the user to decide if exit the $\ast$ $\ast$ simulation or tio disable the assisted mode \mbox{\Hypertarget{class_controller_class_a591d0791dd009a33e0713ddb72309eaa}\label{class_controller_class_a591d0791dd009a33e0713ddb72309eaa}} 
+\index{ControllerClass@{ControllerClass}!doneCb@{doneCb}}
+\index{doneCb@{doneCb}!ControllerClass@{ControllerClass}}
+\doxysubsubsection{\texorpdfstring{doneCb()}{doneCb()}}
+{\footnotesize\ttfamily void Controller\+Class\+::done\+Cb (\begin{DoxyParamCaption}\item[{const actionlib\+::\+Simple\+Client\+Goal\+State \&}]{state,  }\item[{const move\+\_\+base\+\_\+msgs\+::\+Move\+Base\+Result\+Const\+Ptr \&}]{result }\end{DoxyParamCaption})}
+
+
+
+Call back of the send\+Goal for when the goal is reached. 
+
+\mbox{\Hypertarget{class_controller_class_a1d6d32126aaf2be9d3deb81ed79056d0}\label{class_controller_class_a1d6d32126aaf2be9d3deb81ed79056d0}} 
+\index{ControllerClass@{ControllerClass}!UserDriveCallBack@{UserDriveCallBack}}
+\index{UserDriveCallBack@{UserDriveCallBack}!ControllerClass@{ControllerClass}}
+\doxysubsubsection{\texorpdfstring{UserDriveCallBack()}{UserDriveCallBack()}}
+{\footnotesize\ttfamily void Controller\+Class\+::\+User\+Drive\+Call\+Back (\begin{DoxyParamCaption}\item[{const geometry\+\_\+msgs\+::\+Twist\+::\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})}
+
+
+
+Function for modify the velocity. 
+
+It will be usefull for the collision avoidance Vel\+From\+Teleop will be modified only if assisted is true 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/rt2\+\_\+first\+\_\+assignment/controller\+\_\+class.\+h\item 
+src/\mbox{\hyperlink{controller_8cpp}{controller.\+cpp}}\end{DoxyCompactItemize}

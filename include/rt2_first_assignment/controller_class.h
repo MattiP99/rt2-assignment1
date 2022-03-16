@@ -1,3 +1,12 @@
+/** 
+* \class ControllerClass
+* \brief A class for the mobile robot controller.
+*
+* This class implements the controller for our mobile robot. It's aim to contain all the variables and all the function used by the controller.cpp file
+* 
+*/
+
+
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
@@ -22,13 +31,17 @@
 #include "rt2_first_assignment/Change_mode_service.h"
 #include "rt2_first_assignment/Set_goal_service.h"
 #include <std_srvs/SetBool.h>
-typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> ActionClient;
+typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> ActionClient; ///< Global variable representing my action client 
 
 class ControllerClass {
 public:
   
   
-  
+  /** 
+* \brief A constructor.
+*
+* the constructor contains as parameter two node handles in order to manage a second waiting queue for canceling the goal in a more fast way.
+*/
   ControllerClass(ros::NodeHandle* node_handle, ros::NodeHandle* node_handle2);
   ~ControllerClass();
  

@@ -1,0 +1,86 @@
+\hypertarget{ui_8cpp}{}\doxysection{src/ui.cpp File Reference}
+\label{ui_8cpp}\index{src/ui.cpp@{src/ui.cpp}}
+
+
+User Interface for the mobile robot simulation in rviz and Gazebo.  
+
+
+{\ttfamily \#include \char`\"{}ros/ros.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$termios.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}rt2\+\_\+first\+\_\+assignment/utils.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}rt2\+\_\+first\+\_\+assignment/user\+\_\+class.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$move\+\_\+base\+\_\+msgs/\+Move\+Base\+Action.\+h$>$}\newline
+{\ttfamily \#include $<$move\+\_\+base\+\_\+msgs/\+Move\+Base\+Goal.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}std\+\_\+msgs/\+Int32.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$std\+\_\+msgs/\+Empty.\+h$>$}\newline
+{\ttfamily \#include $<$std\+\_\+msgs/\+Bool.\+h$>$}\newline
+{\ttfamily \#include $<$std\+\_\+msgs/\+String.\+h$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$std\+\_\+srvs/\+Set\+Bool.\+h$>$}\newline
+{\ttfamily \#include $<$geometry\+\_\+msgs/\+Point.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}geometry\+\_\+msgs/\+Twist.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}rt2\+\_\+first\+\_\+assignment/\+Change\+\_\+mode\+\_\+service.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}rt2\+\_\+first\+\_\+assignment/\+Set\+\_\+goal\+\_\+service.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$actionlib\+\_\+msgs/\+Goal\+I\+D.\+h$>$}\newline
+{\ttfamily \#include $<$actionlib/client/simple\+\_\+action\+\_\+client.\+h$>$}\newline
+{\ttfamily \#include $<$actionlib/client/terminal\+\_\+state.\+h$>$}\newline
+{\ttfamily \#include $<$ros/callback\+\_\+queue.\+h$>$}\newline
+Include dependency graph for ui.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ui_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{ui_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{ui_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+int {\bfseries main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{ui_8cpp_acecdd1cee07d3cb74838dcf03e6b6dcc}\label{ui_8cpp_acecdd1cee07d3cb74838dcf03e6b6dcc}} 
+$\ast$$\ast$const int {\bfseries T\+E\+X\+T\+\_\+\+D\+E\+L\+AY} = 25000
+\item 
+\mbox{\Hypertarget{ui_8cpp_aa6a93f7fc1f542adf0deb8b1cb03f0d1}\label{ui_8cpp_aa6a93f7fc1f542adf0deb8b1cb03f0d1}} 
+rt2\+\_\+first\+\_\+assignment\+::\+Set\+\_\+goal\+\_\+service \mbox{\hyperlink{ui_8cpp_aa6a93f7fc1f542adf0deb8b1cb03f0d1}{goal\+\_\+srv}}
+\begin{DoxyCompactList}\small\item\em our service instance for setting the goal \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{ui_8cpp_a5e5e916496f12e2a2e79e605aff2ce72}\label{ui_8cpp_a5e5e916496f12e2a2e79e605aff2ce72}} 
+rt2\+\_\+first\+\_\+assignment\+::\+Change\+\_\+mode\+\_\+service \mbox{\hyperlink{ui_8cpp_a5e5e916496f12e2a2e79e605aff2ce72}{mode\+\_\+srv}}
+\begin{DoxyCompactList}\small\item\em our service instance for changing the driving mode \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+User Interface for the mobile robot simulation in rviz and Gazebo. 
+
+\begin{DoxyAuthor}{Author}
+Mattia Piras 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+14/03/2022
+\end{DoxyDate}
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em rt1a3\+\_\+action\+\_\+timeout} & Define the time interval within the action can finish. Otherwise an error occurs \\
+\hline
+\mbox{\texttt{ in}}  & {\em rt1a3\+\_\+brake\+\_\+threshold} & Define the minum distance which the robot has to be considered in a safe zone from.\\
+\hline
+\end{DoxyParams}
+Subscribes to\+: ~\newline
+ ° /sub\+State\+Info ° /timeout
+
+Publishes to\+: ~\newline
+ ° /pub\+\_\+cancel ° /pub\+\_\+mode
+
+Services \+: ~\newline
+ ° /service\+\_\+mode ° /service\+\_\+goal
+
+Description \+:
+
+This node is in charge for the user interface. The User has the possibility play with the simulation in three ways\+: The first is letting the robot drive towards a goal that he/her has inserted at the beginning of the simulation. In this case the user can cancel the goal by pressing a button The second way is letting the user guiding the robot vua keyboard The third one is related to the second but with the difference that the user is assisted during the controlling of the robot, so certain directions are not allowed (e.\+g. because of a wall) 

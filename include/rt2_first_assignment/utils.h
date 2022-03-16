@@ -1,3 +1,18 @@
+/**
+* \file utlis.h
+* \brief Addiction functions
+* \author Mattia Piras
+* \version 0.1
+* \date 14/03/2022
+*
+* Description :
+*
+* This file contains some addictional functions that are usefull for the dysplaying some values and for getting the intefrace more user friendly
+*
+*/
+**/
+
+
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -15,7 +30,7 @@
 void clearInputBuffer() {
   std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
 }
-/**
+/*
  * Changes color of terminal text
  * @param colorCode  ANSI color code
  * @param isBold     Bold text or not

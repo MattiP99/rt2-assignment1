@@ -1,3 +1,11 @@
+/** 
+* \class UserClass
+* \brief A class for the user interface.
+*
+* This class implements user interface. It's aim to contain all the variables and all the function used by the ui.cpp file
+* 
+*/
+
 #ifndef USER_H
 #define USER_H
 
