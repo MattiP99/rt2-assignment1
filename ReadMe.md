@@ -258,6 +258,7 @@ and finally I popped the dictionary indexes that would have moved the robot towa
 
 # Function that removes commands from the dictionary when an obstacle is detected. 
 #In this way, when an obstacle is detected, the movement in that direction is disabled
+
 def pop_dict(dictionary):
 		
 		global ok_left
