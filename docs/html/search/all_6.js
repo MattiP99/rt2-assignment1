@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['manualdriving_14',['manualDriving',['../class_controller_class.html#a2d03e1c1769294ab187041fab2cb73e2',1,'ControllerClass']]],
-  ['mindistances_15',['minDistances',['../structmin_distances.html',1,'']]],
-  ['mode_5fchoice_16',['mode_choice',['../class_controller_class.html#a55e25ed6916cc24758819aa328ab92d4',1,'ControllerClass::mode_choice()'],['../class_user_class.html#a0d8248ef9c2a71481c94b290ee37f3bf',1,'UserClass::mode_choice()']]],
-  ['mode_5fsrv_17',['mode_srv',['../ui_8cpp.html#a5e5e916496f12e2a2e79e605aff2ce72',1,'ui.cpp']]]
+  ['fail_18',['FAIL',['../classgo__to__desired__pos_1_1bcolors.html#ac67c6bd654480e87ac91361fcd42d41b',1,'go_to_desired_pos.bcolors.FAIL()'],['../classmy__teleop__twist__keyboard_1_1bcolors.html#ab0736da480b2b07bfa517aaf5752b85d',1,'my_teleop_twist_keyboard.bcolors.FAIL()'],['../classteleop__avoid_1_1bcolors.html#acada3083c5fa741e40b3847ee5dea39d',1,'teleop_avoid.bcolors.FAIL()'],['../class_u_i_1_1bcolors.html#a050f5652235119a2f3adacc5731e37a9',1,'UI.bcolors.FAIL()']]],
+  ['feedback_5fcb_19',['feedback_cb',['../namespacego__to__desired__pos.html#a04f86e2e0c72cfe737f7f23db591914e',1,'go_to_desired_pos']]],
+  ['flag_20',['flag',['../namespace_u_i.html#a572242129b77c703404402ae131516e5',1,'UI']]]
 ];

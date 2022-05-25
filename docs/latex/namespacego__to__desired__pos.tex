@@ -1,0 +1,212 @@
+\hypertarget{namespacego__to__desired__pos}{}\doxysection{go\+\_\+to\+\_\+desired\+\_\+pos Namespace Reference}
+\label{namespacego__to__desired__pos}\index{go\_to\_desired\_pos@{go\_to\_desired\_pos}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classgo__to__desired__pos_1_1bcolors}{bcolors}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacego__to__desired__pos_a9e258a2e74d4a72baef75f9ba74f3dbc}{action\+\_\+client}} ()
+\item 
+def \mbox{\hyperlink{namespacego__to__desired__pos_a89512116ac44f939e16b01b46e19fc7b}{done\+\_\+cb}} (status, result)
+\item 
+def \mbox{\hyperlink{namespacego__to__desired__pos_a1db04c45bf06719794b54728d4f0543b}{active\+\_\+cb}} ()
+\item 
+def \mbox{\hyperlink{namespacego__to__desired__pos_a04f86e2e0c72cfe737f7f23db591914e}{feedback\+\_\+cb}} (feedback)
+\item 
+def \mbox{\hyperlink{namespacego__to__desired__pos_afbc845f273d7ff6a512879b7e829db92}{set\+\_\+goal}} (x, y)
+\item 
+def \mbox{\hyperlink{namespacego__to__desired__pos_abfae6513d645ed57a5cada572bf7431b}{update\+\_\+variables}} ()
+\item 
+def \mbox{\hyperlink{namespacego__to__desired__pos_a3a19b30cb006c7de5f1a8eb231606246}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{namespacego__to__desired__pos_a80580676d20031c0e3712da4ad3fb507}{msg}}
+\item 
+\mbox{\hyperlink{namespacego__to__desired__pos_add72cc2098a501ed25cfcd55fa664d2e}{goal\+\_\+msg}} = Move\+Base\+Goal()
+\item 
+int \mbox{\hyperlink{namespacego__to__desired__pos_a1a1ce46ac44db4c3b255d33553566ac1}{active\+\_\+}} = 0
+\item 
+int \mbox{\hyperlink{namespacego__to__desired__pos_af0ecf7a16b1346459f60ba1cfea9d393}{desired\+\_\+position\+\_\+x}} = 0
+\item 
+int \mbox{\hyperlink{namespacego__to__desired__pos_a0abad38bb84712f96d48998c2328da6f}{desired\+\_\+position\+\_\+y}} = 0
+\item 
+\mbox{\hyperlink{namespacego__to__desired__pos_af39d3fc360f394ec059ac0e3709c7c5b}{client}} = actionlib.\+Simple\+Action\+Client(\textquotesingle{}/move\+\_\+base\textquotesingle{}, Move\+Base\+Action)
+\item 
+bool \mbox{\hyperlink{namespacego__to__desired__pos_a1e503658605e92390edef3716fa6776c}{achieved}} = False
+\item 
+int \mbox{\hyperlink{namespacego__to__desired__pos_a7caaaadcd3c4fcc974106343b87467e1}{goal\+\_\+cont}} = 1
+\item 
+int \mbox{\hyperlink{namespacego__to__desired__pos_aa86c2059ac5c0b84936d1fd6fec31473}{cont}} = 1
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}.. module:: go_to_desired_pos
+    :platform: Unix
+    :synopsis: Python module for controlling the robot providing a desired position to reach. 
+.. moduleauthor:: Mattia Piras <pirasmattia2299@gmail.com>
+This is the First Robot Controlling Modality.
+This node makes the robot autonomously reach a x,y position inserted by the user. 
+The robot can reach the user defined x,y coordinates thanks to the 'move_base' action server. 
+The robot is going to plan the path through the Dijkstra's algorithm. 
+ROS parameters: 
+    1.  "active": (type: int) parameter for activate the desired control modality 
+    2.  "des_pos_x": (type: double) parameter for the desired X coordinate 
+    3.  "des_pos_y": (type: double) parameter for the desired Y coordinate 
+These ROS parameters too and they are set by the :mod:`UI` node.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacego__to__desired__pos_a9e258a2e74d4a72baef75f9ba74f3dbc}\label{namespacego__to__desired__pos_a9e258a2e74d4a72baef75f9ba74f3dbc}} 
+\index{go\_to\_desired\_pos@{go\_to\_desired\_pos}!action\_client@{action\_client}}
+\index{action\_client@{action\_client}!go\_to\_desired\_pos@{go\_to\_desired\_pos}}
+\doxysubsubsection{\texorpdfstring{action\_client()}{action\_client()}}
+{\footnotesize\ttfamily def go\+\_\+to\+\_\+desired\+\_\+pos.\+action\+\_\+client (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}This function is called for both wait until we are connected to the action server and 
+to set some parameters of the action message.
+    No Args. 
+    No Returns. 
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacego__to__desired__pos_a1db04c45bf06719794b54728d4f0543b}\label{namespacego__to__desired__pos_a1db04c45bf06719794b54728d4f0543b}} 
+\index{go\_to\_desired\_pos@{go\_to\_desired\_pos}!active\_cb@{active\_cb}}
+\index{active\_cb@{active\_cb}!go\_to\_desired\_pos@{go\_to\_desired\_pos}}
+\doxysubsubsection{\texorpdfstring{active\_cb()}{active\_cb()}}
+{\footnotesize\ttfamily def go\+\_\+to\+\_\+desired\+\_\+pos.\+active\+\_\+cb (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Callback that gets called on transitions to Active.
+No Args.
+No Returns. 
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacego__to__desired__pos_a89512116ac44f939e16b01b46e19fc7b}\label{namespacego__to__desired__pos_a89512116ac44f939e16b01b46e19fc7b}} 
+\index{go\_to\_desired\_pos@{go\_to\_desired\_pos}!done\_cb@{done\_cb}}
+\index{done\_cb@{done\_cb}!go\_to\_desired\_pos@{go\_to\_desired\_pos}}
+\doxysubsubsection{\texorpdfstring{done\_cb()}{done\_cb()}}
+{\footnotesize\ttfamily def go\+\_\+to\+\_\+desired\+\_\+pos.\+done\+\_\+cb (\begin{DoxyParamCaption}\item[{}]{status,  }\item[{}]{result }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}This is a callback function called after the execution of the action server. It gives the client information about the termination of the goal process. 
+In particular, this callback function puts a value that into the argument ``status``. 
+Depending on the value of this variable the client knows the status of the goal processing after the execution. 
+Args:
+    status (actionlib_GoalStatus): 
+        terminal state (as an integer from actionlib_msgs/GoalStatus)
+    result (MoveBaseResult): 
+        result of the goal processing. 
+No Returns. \end{DoxyVerb}
+ \mbox{\Hypertarget{namespacego__to__desired__pos_a04f86e2e0c72cfe737f7f23db591914e}\label{namespacego__to__desired__pos_a04f86e2e0c72cfe737f7f23db591914e}} 
+\index{go\_to\_desired\_pos@{go\_to\_desired\_pos}!feedback\_cb@{feedback\_cb}}
+\index{feedback\_cb@{feedback\_cb}!go\_to\_desired\_pos@{go\_to\_desired\_pos}}
+\doxysubsubsection{\texorpdfstring{feedback\_cb()}{feedback\_cb()}}
+{\footnotesize\ttfamily def go\+\_\+to\+\_\+desired\+\_\+pos.\+feedback\+\_\+cb (\begin{DoxyParamCaption}\item[{}]{feedback }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Callback that gets called whenever feedback for this goal is received. 
+Args: 
+    feedback (move_base_msgs/MoveBaseActionFeedback.msg): information about the robot status during the the action server execution.
+No Returns.  
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacego__to__desired__pos_a3a19b30cb006c7de5f1a8eb231606246}\label{namespacego__to__desired__pos_a3a19b30cb006c7de5f1a8eb231606246}} 
+\index{go\_to\_desired\_pos@{go\_to\_desired\_pos}!main@{main}}
+\index{main@{main}!go\_to\_desired\_pos@{go\_to\_desired\_pos}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily def go\+\_\+to\+\_\+desired\+\_\+pos.\+main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}In the main funciton some goals parameters of the goal message are set, updated variables and, if the current modality 
+is chosen, the ``set_goal()`` function is called. Finally, the the case in which a goal was achieved and the one in which the user 
+decides to send a cancel request before the goal achievement is managed. 
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacego__to__desired__pos_afbc845f273d7ff6a512879b7e829db92}\label{namespacego__to__desired__pos_afbc845f273d7ff6a512879b7e829db92}} 
+\index{go\_to\_desired\_pos@{go\_to\_desired\_pos}!set\_goal@{set\_goal}}
+\index{set\_goal@{set\_goal}!go\_to\_desired\_pos@{go\_to\_desired\_pos}}
+\doxysubsubsection{\texorpdfstring{set\_goal()}{set\_goal()}}
+{\footnotesize\ttfamily def go\+\_\+to\+\_\+desired\+\_\+pos.\+set\+\_\+goal (\begin{DoxyParamCaption}\item[{}]{x,  }\item[{}]{y }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}This function fills the x, y fields of the goal message and sends a goal request to the action server.
+Args:
+    x (double): x coordinate of the position that we want the robot to reach.  
+    y (double): y coordinate of the position that we want the robot to reach.
+No Returns
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacego__to__desired__pos_abfae6513d645ed57a5cada572bf7431b}\label{namespacego__to__desired__pos_abfae6513d645ed57a5cada572bf7431b}} 
+\index{go\_to\_desired\_pos@{go\_to\_desired\_pos}!update\_variables@{update\_variables}}
+\index{update\_variables@{update\_variables}!go\_to\_desired\_pos@{go\_to\_desired\_pos}}
+\doxysubsubsection{\texorpdfstring{update\_variables()}{update\_variables()}}
+{\footnotesize\ttfamily def go\+\_\+to\+\_\+desired\+\_\+pos.\+update\+\_\+variables (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Function for updating the ROS parameters: active, des_pos_x, des_pos_y. 
+No Args
+No Returns
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacego__to__desired__pos_a1e503658605e92390edef3716fa6776c}\label{namespacego__to__desired__pos_a1e503658605e92390edef3716fa6776c}} 
+\index{go\_to\_desired\_pos@{go\_to\_desired\_pos}!achieved@{achieved}}
+\index{achieved@{achieved}!go\_to\_desired\_pos@{go\_to\_desired\_pos}}
+\doxysubsubsection{\texorpdfstring{achieved}{achieved}}
+{\footnotesize\ttfamily bool go\+\_\+to\+\_\+desired\+\_\+pos.\+achieved = False}
+
+\mbox{\Hypertarget{namespacego__to__desired__pos_a1a1ce46ac44db4c3b255d33553566ac1}\label{namespacego__to__desired__pos_a1a1ce46ac44db4c3b255d33553566ac1}} 
+\index{go\_to\_desired\_pos@{go\_to\_desired\_pos}!active\_@{active\_}}
+\index{active\_@{active\_}!go\_to\_desired\_pos@{go\_to\_desired\_pos}}
+\doxysubsubsection{\texorpdfstring{active\_}{active\_}}
+{\footnotesize\ttfamily int go\+\_\+to\+\_\+desired\+\_\+pos.\+active\+\_\+ = 0}
+
+\mbox{\Hypertarget{namespacego__to__desired__pos_af39d3fc360f394ec059ac0e3709c7c5b}\label{namespacego__to__desired__pos_af39d3fc360f394ec059ac0e3709c7c5b}} 
+\index{go\_to\_desired\_pos@{go\_to\_desired\_pos}!client@{client}}
+\index{client@{client}!go\_to\_desired\_pos@{go\_to\_desired\_pos}}
+\doxysubsubsection{\texorpdfstring{client}{client}}
+{\footnotesize\ttfamily go\+\_\+to\+\_\+desired\+\_\+pos.\+client = actionlib.\+Simple\+Action\+Client(\textquotesingle{}/move\+\_\+base\textquotesingle{}, Move\+Base\+Action)}
+
+\mbox{\Hypertarget{namespacego__to__desired__pos_aa86c2059ac5c0b84936d1fd6fec31473}\label{namespacego__to__desired__pos_aa86c2059ac5c0b84936d1fd6fec31473}} 
+\index{go\_to\_desired\_pos@{go\_to\_desired\_pos}!cont@{cont}}
+\index{cont@{cont}!go\_to\_desired\_pos@{go\_to\_desired\_pos}}
+\doxysubsubsection{\texorpdfstring{cont}{cont}}
+{\footnotesize\ttfamily int go\+\_\+to\+\_\+desired\+\_\+pos.\+cont = 1}
+
+\mbox{\Hypertarget{namespacego__to__desired__pos_af0ecf7a16b1346459f60ba1cfea9d393}\label{namespacego__to__desired__pos_af0ecf7a16b1346459f60ba1cfea9d393}} 
+\index{go\_to\_desired\_pos@{go\_to\_desired\_pos}!desired\_position\_x@{desired\_position\_x}}
+\index{desired\_position\_x@{desired\_position\_x}!go\_to\_desired\_pos@{go\_to\_desired\_pos}}
+\doxysubsubsection{\texorpdfstring{desired\_position\_x}{desired\_position\_x}}
+{\footnotesize\ttfamily int go\+\_\+to\+\_\+desired\+\_\+pos.\+desired\+\_\+position\+\_\+x = 0}
+
+\mbox{\Hypertarget{namespacego__to__desired__pos_a0abad38bb84712f96d48998c2328da6f}\label{namespacego__to__desired__pos_a0abad38bb84712f96d48998c2328da6f}} 
+\index{go\_to\_desired\_pos@{go\_to\_desired\_pos}!desired\_position\_y@{desired\_position\_y}}
+\index{desired\_position\_y@{desired\_position\_y}!go\_to\_desired\_pos@{go\_to\_desired\_pos}}
+\doxysubsubsection{\texorpdfstring{desired\_position\_y}{desired\_position\_y}}
+{\footnotesize\ttfamily int go\+\_\+to\+\_\+desired\+\_\+pos.\+desired\+\_\+position\+\_\+y = 0}
+
+\mbox{\Hypertarget{namespacego__to__desired__pos_a7caaaadcd3c4fcc974106343b87467e1}\label{namespacego__to__desired__pos_a7caaaadcd3c4fcc974106343b87467e1}} 
+\index{go\_to\_desired\_pos@{go\_to\_desired\_pos}!goal\_cont@{goal\_cont}}
+\index{goal\_cont@{goal\_cont}!go\_to\_desired\_pos@{go\_to\_desired\_pos}}
+\doxysubsubsection{\texorpdfstring{goal\_cont}{goal\_cont}}
+{\footnotesize\ttfamily int go\+\_\+to\+\_\+desired\+\_\+pos.\+goal\+\_\+cont = 1}
+
+\mbox{\Hypertarget{namespacego__to__desired__pos_add72cc2098a501ed25cfcd55fa664d2e}\label{namespacego__to__desired__pos_add72cc2098a501ed25cfcd55fa664d2e}} 
+\index{go\_to\_desired\_pos@{go\_to\_desired\_pos}!goal\_msg@{goal\_msg}}
+\index{goal\_msg@{goal\_msg}!go\_to\_desired\_pos@{go\_to\_desired\_pos}}
+\doxysubsubsection{\texorpdfstring{goal\_msg}{goal\_msg}}
+{\footnotesize\ttfamily go\+\_\+to\+\_\+desired\+\_\+pos.\+goal\+\_\+msg = Move\+Base\+Goal()}
+
+\mbox{\Hypertarget{namespacego__to__desired__pos_a80580676d20031c0e3712da4ad3fb507}\label{namespacego__to__desired__pos_a80580676d20031c0e3712da4ad3fb507}} 
+\index{go\_to\_desired\_pos@{go\_to\_desired\_pos}!msg@{msg}}
+\index{msg@{msg}!go\_to\_desired\_pos@{go\_to\_desired\_pos}}
+\doxysubsubsection{\texorpdfstring{msg}{msg}}
+{\footnotesize\ttfamily string go\+\_\+to\+\_\+desired\+\_\+pos.\+msg}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 =  \textcolor{stringliteral}{""" }}
+\DoxyCodeLine{2 \textcolor{stringliteral}{"""} + bcolors.BOLD + \textcolor{stringliteral}{"""}}
+\DoxyCodeLine{3 \textcolor{stringliteral}{This node makes the robot autonomously reach a x,y position inserted by the user.}}
+\DoxyCodeLine{4 \textcolor{stringliteral}{The user's x,y coordinates are reached thanks to the 'move\_base' action server. }}
+\DoxyCodeLine{5 \textcolor{stringliteral}{The robot is going to plan the path through the Dijkstra's algorithm. }}
+\DoxyCodeLine{6 \textcolor{stringliteral}{"""} +bcolors.ENDC + \textcolor{stringliteral}{"""}}
+\DoxyCodeLine{7 \textcolor{stringliteral}{"""}}
+
+\end{DoxyCode}

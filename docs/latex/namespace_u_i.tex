@@ -1,0 +1,134 @@
+\hypertarget{namespace_u_i}{}\doxysection{UI Namespace Reference}
+\label{namespace_u_i}\index{UI@{UI}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_u_i_1_1bcolors}{bcolors}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespace_u_i_a8203d885551ea8a7112cd175f5998a8c}{interpreter}} ()
+\item 
+def \mbox{\hyperlink{namespace_u_i_a4570e2a9d5f1ddf4f326ca5f62269e4e}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{namespace_u_i_a2b95e4f76933689526512fc2cae3e327}{ascii\+\_\+art\+\_\+message}}
+\item 
+string \mbox{\hyperlink{namespace_u_i_a25a43db0b31fde4f22293fc0488ec958}{intro}}
+\item 
+string \mbox{\hyperlink{namespace_u_i_af2f986ba9434ec038f186de31f10bc60}{menu\+\_\+msg}}
+\item 
+bool \mbox{\hyperlink{namespace_u_i_a572242129b77c703404402ae131516e5}{flag}} = False
+\item 
+\mbox{\hyperlink{namespace_u_i_a6e1b2f6a43ebcc45cf2a10f0a8cd5400}{active\+\_\+}} = rospy.\+get\+\_\+param(\char`\"{}active\char`\"{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}.. module:: UI
+    :platform: Unix
+    :synopsis: Python module for the User Interface
+.. moduleauthor:: Mattia Piras <pirasmattia2299@gmail.com>
+This module implements an user interface that allows the user to switch among the three modalities.
+ROS parameter are used in order to activate / deactivate the chosen modality. 
+ROS parameters: 
+    1.  "active": (type: int) parameter for activate the desired control modality 
+    2.  "des_pos_x": (type: double) parameter for the desired X coordinate 
+    3.  "des_pos_y": (type: double) parameter for the desired Y coordinate 
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespace_u_i_a8203d885551ea8a7112cd175f5998a8c}\label{namespace_u_i_a8203d885551ea8a7112cd175f5998a8c}} 
+\index{UI@{UI}!interpreter@{interpreter}}
+\index{interpreter@{interpreter}!UI@{UI}}
+\doxysubsubsection{\texorpdfstring{interpreter()}{interpreter()}}
+{\footnotesize\ttfamily def U\+I.\+interpreter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}This function gets the keyboard user input and changes the ROS parameter active depending on which modality was chosen.
+- '1' keyboard key is used for choosing the autonomously reaching modality;
+- '2' keyboard key is used for the free keyboard driving modality;
+- '3' keyboard key is used for the free keyboard driving modality with a collision avoidance algorithm;
+- '4' keyboard key is used for quitting the application and terminates all nodes.
+    No Args. 
+    No Returns. 
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespace_u_i_a4570e2a9d5f1ddf4f326ca5f62269e4e}\label{namespace_u_i_a4570e2a9d5f1ddf4f326ca5f62269e4e}} 
+\index{UI@{UI}!main@{main}}
+\index{main@{main}!UI@{UI}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily def U\+I.\+main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}In the main() function the ``interpreter()`` function is looped and some introductory messages are printed on the terminal. "
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespace_u_i_a6e1b2f6a43ebcc45cf2a10f0a8cd5400}\label{namespace_u_i_a6e1b2f6a43ebcc45cf2a10f0a8cd5400}} 
+\index{UI@{UI}!active\_@{active\_}}
+\index{active\_@{active\_}!UI@{UI}}
+\doxysubsubsection{\texorpdfstring{active\_}{active\_}}
+{\footnotesize\ttfamily U\+I.\+active\+\_\+ = rospy.\+get\+\_\+param(\char`\"{}active\char`\"{})}
+
+\mbox{\Hypertarget{namespace_u_i_a2b95e4f76933689526512fc2cae3e327}\label{namespace_u_i_a2b95e4f76933689526512fc2cae3e327}} 
+\index{UI@{UI}!ascii\_art\_message@{ascii\_art\_message}}
+\index{ascii\_art\_message@{ascii\_art\_message}!UI@{UI}}
+\doxysubsubsection{\texorpdfstring{ascii\_art\_message}{ascii\_art\_message}}
+{\footnotesize\ttfamily string U\+I.\+ascii\+\_\+art\+\_\+message}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 =  \textcolor{stringliteral}{""" """} + bcolors.BOLD + bcolors.HEADER + \textcolor{stringliteral}{"""}}
+\DoxyCodeLine{2 \textcolor{stringliteral}{                 \_\_\_\_\_\_\_\_\_}}
+\DoxyCodeLine{3 \textcolor{stringliteral}{            |\(\backslash\)     /|\(\backslash\) \_   \_\_/}}
+\DoxyCodeLine{4 \textcolor{stringliteral}{            | )   ( |   ) (   }}
+\DoxyCodeLine{5 \textcolor{stringliteral}{            | |   | |   | |   }}
+\DoxyCodeLine{6 \textcolor{stringliteral}{            | |   | |   | |   }}
+\DoxyCodeLine{7 \textcolor{stringliteral}{            | |   | |   | |   }}
+\DoxyCodeLine{8 \textcolor{stringliteral}{            | (\_\_\_) |\_\_\_) (\_\_\_}}
+\DoxyCodeLine{9 \textcolor{stringliteral}{            (\_\_\_\_\_\_\_)\(\backslash\)\_\_\_\_\_\_\_/}}
+\DoxyCodeLine{10 \textcolor{stringliteral}{"""} + bcolors.ENDC +\textcolor{stringliteral}{""" """}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_u_i_a572242129b77c703404402ae131516e5}\label{namespace_u_i_a572242129b77c703404402ae131516e5}} 
+\index{UI@{UI}!flag@{flag}}
+\index{flag@{flag}!UI@{UI}}
+\doxysubsubsection{\texorpdfstring{flag}{flag}}
+{\footnotesize\ttfamily bool U\+I.\+flag = False}
+
+\mbox{\Hypertarget{namespace_u_i_a25a43db0b31fde4f22293fc0488ec958}\label{namespace_u_i_a25a43db0b31fde4f22293fc0488ec958}} 
+\index{UI@{UI}!intro@{intro}}
+\index{intro@{intro}!UI@{UI}}
+\doxysubsubsection{\texorpdfstring{intro}{intro}}
+{\footnotesize\ttfamily string U\+I.\+intro}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 =  \textcolor{stringliteral}{""" }}
+\DoxyCodeLine{2 \textcolor{stringliteral}{"""} + bcolors.HEADER + bcolors.BOLD + \textcolor{stringliteral}{"""}}
+\DoxyCodeLine{3 \textcolor{stringliteral}{Hi! This is your User Interface """} + bcolors.ENDC + bcolors.UNDERLINE + \textcolor{stringliteral}{"""}}
+\DoxyCodeLine{4 \textcolor{stringliteral}{You can move the robot through three different modalities:}}
+\DoxyCodeLine{5 \textcolor{stringliteral}{"""}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{namespace_u_i_af2f986ba9434ec038f186de31f10bc60}\label{namespace_u_i_af2f986ba9434ec038f186de31f10bc60}} 
+\index{UI@{UI}!menu\_msg@{menu\_msg}}
+\index{menu\_msg@{menu\_msg}!UI@{UI}}
+\doxysubsubsection{\texorpdfstring{menu\_msg}{menu\_msg}}
+{\footnotesize\ttfamily string U\+I.\+menu\+\_\+msg}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 =  \textcolor{stringliteral}{"""}}
+\DoxyCodeLine{2 \textcolor{stringliteral}{"""} + bcolors.ENDC + \textcolor{stringliteral}{"""}}
+\DoxyCodeLine{3 \textcolor{stringliteral}{-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{4 \textcolor{stringliteral}{[1] """} + bcolors.UNDERLINE + \textcolor{stringliteral}{"""Insert your desired position """} + bcolors.ENDC + \textcolor{stringliteral}{"""}}
+\DoxyCodeLine{5 \textcolor{stringliteral}{[2] """} + bcolors.UNDERLINE + \textcolor{stringliteral}{"""Free Drive the robot with your keyboard """} + bcolors.ENDC +\textcolor{stringliteral}{"""}}
+\DoxyCodeLine{6 \textcolor{stringliteral}{[3] """} + bcolors.UNDERLINE + \textcolor{stringliteral}{"""Free Drive the robot with your keyboard assisted by an obstacle avoidance algorithm """} + bcolors.ENDC + \textcolor{stringliteral}{"""}}
+\DoxyCodeLine{7 \textcolor{stringliteral}{[4] """} + bcolors.UNDERLINE + bcolors.FAIL + \textcolor{stringliteral}{"""Quit the simulaiton}}
+\DoxyCodeLine{8 \textcolor{stringliteral}{"""}}
+
+\end{DoxyCode}

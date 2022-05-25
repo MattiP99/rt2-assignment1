@@ -1,9 +1,5 @@
 var searchData=
 [
-  ['cancelcallback_3',['CancelCallBack',['../class_controller_class.html#af3f0bd58f36159c3a7d4cb4c2653ba14',1,'ControllerClass']]],
-  ['cancelgoal_4',['cancelGoal',['../class_user_class.html#a3f4069fb4a75351ff24ccc96e8e07cdf',1,'UserClass']]],
-  ['check_5ftimeout_5',['check_timeout',['../class_controller_class.html#a99edc72ca3a4cd745f8e7ece3b0742f4',1,'ControllerClass']]],
-  ['collisionavoidance_6',['collisionAvoidance',['../class_controller_class.html#a43204db3ff021a2e4e0ee04bbfe22786',1,'ControllerClass']]],
-  ['controller_2ecpp_7',['controller.cpp',['../controller_8cpp.html',1,'']]],
-  ['controllerclass_8',['ControllerClass',['../class_controller_class.html',1,'ControllerClass'],['../class_controller_class.html#a5b04eeba095f7a04f10c2e03b4244ea6',1,'ControllerClass::ControllerClass()']]]
+  ['bcolors_6',['bcolors',['../classgo__to__desired__pos_1_1bcolors.html',1,'go_to_desired_pos.bcolors'],['../classmy__teleop__twist__keyboard_1_1bcolors.html',1,'my_teleop_twist_keyboard.bcolors'],['../classteleop__avoid_1_1bcolors.html',1,'teleop_avoid.bcolors'],['../class_u_i_1_1bcolors.html',1,'UI.bcolors']]],
+  ['bold_7',['BOLD',['../classgo__to__desired__pos_1_1bcolors.html#a7ecd4bcdeddb5c5f058f3c4ed7f11fac',1,'go_to_desired_pos.bcolors.BOLD()'],['../classmy__teleop__twist__keyboard_1_1bcolors.html#aced4766ac9aab1c47df32d7cd3ef22ce',1,'my_teleop_twist_keyboard.bcolors.BOLD()'],['../classteleop__avoid_1_1bcolors.html#aedbe052ae07c04d8eb4ec7851ad0dd98',1,'teleop_avoid.bcolors.BOLD()'],['../class_u_i_1_1bcolors.html#ac7400a33c4890d8070e232b011e39ec6',1,'UI.bcolors.BOLD()']]]
 ];
