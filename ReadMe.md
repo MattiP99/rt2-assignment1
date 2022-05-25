@@ -1,6 +1,6 @@
 Author: Mattia Piras
 
-#First assignment for Research Track 2: Course of Robotics Engineering Unige  
+# First assignment for Research Track 2: Course of Robotics Engineering Unige  
 ---------------------------------------------------------------------------------------------------------
 
 In this project, a robot moves in an environment initially unknown to it. Thanks to laser scanners mounted on board the robot is able to build a map of the environment and move without encountering obstacles. It is required that the robot can move in 3 different modes:
@@ -9,7 +9,7 @@ In this project, a robot moves in an environment initially unknown to it. Thanks
     - controlling it via keyboard
     - controlling it via keyboard with assistance to avoid obstacles
     
-##INSTALLING AND RUNNING
+## INSTALLING AND RUNNING
 ---------------------------------------------------------------------------------------------------------
 ## Installing and running
 
