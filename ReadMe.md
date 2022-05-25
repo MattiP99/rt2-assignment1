@@ -11,7 +11,7 @@ In this project, a robot moves in an environment initially unknown to it. Thanks
     
 ##INSTALLING AND RUNNING
 ---------------------------------------------------------------------------------------------------------
-##Installing and running
+## Installing and running
 
 Here's some useful informations regarding how to the nodes and the simulation environment. First of all, xterm, a standard terminal emulator, is needed. You can install xterm by entering the following commands in the terminal:
 
@@ -28,7 +28,7 @@ If any of the three node terminates, the launch file will terminates all the nod
 
 
 
-##Environment and Mapping
+## Environment and Mapping
 -----------------------------------------------------------------------------------------------------
 
 The robot moves in the environment in the figure (Gazebo view):
@@ -44,10 +44,10 @@ The final map, visible on Rviz is as follows:
 
 
 
-##Project structure
+## Project structure
 ------------------------------------------------------------------------------------------------------
 
-##User Interface Node
+### User Interface Node
 
 The User Interface node handles the user keyboard inputs. Here's a legend of the allowed commands:
 
@@ -88,7 +88,7 @@ def interpreter():
 	else:
 		print(bcolors.FAIL + bcolors.BOLD + "Wrong key! Use the shown commands " + bcolors.ENDC)
 
-###Autonomously reaching node (First Modality)
+### Autonomously reaching node (First Modality)
 
 This node makes the robot autonomously reach a x,y position inserted by the user. The robot can reach the user's x,y coordinates thanks to the 'move_base' action server. The robot is going to plan the path through the Dijkstra's algorithm. When the first modality is selected, the UI.py node sets the active ROS parameter to 1 letting the first modality's loop to run all the necessary code for sending the desired goal. The desired x, y coordinates are ROS parameters too and they are set by the UI.py node.
 
@@ -159,7 +159,7 @@ if achieved == True: # If a goal was achieved there's no need to cancel the goal
 		flag = 1
 		achieved = False
 
-###Free drive with keyboard node (Second Modality)
+### Free drive with keyboard node (Second Modality)
 
 This node reads inputs from the keyboar and publishes a Twist() message to the cmd_vel topic. Basically I relied on the teleop_twist_keyboard code. So, the functionality is the same:
 
@@ -191,7 +191,7 @@ I modified some lines of code in order to adapt the process on my needs. This mo
     Insertion of an if(active == 2) statement in order to block the code when another modality is running.
     The keys now must be kept pressed in order to move the robot. I did this by setting the key_timeout variable to 0.1. Such variable was the select() timeout. That means that the select() function waits 0.1 seconds for new inputs at every loop.
 
-###Free drive with keyboard and collision avoidance algorithm node (Third Modality)
+### Free drive with keyboard and collision avoidance algorithm node (Third Modality)
 
 This node reads inputs from the keyboard and publishes a Twist() message to the /cmd_vel topic. Basically I relied on the teleop_twist_keyboard code and therefore the functionality is quite the same:
 
