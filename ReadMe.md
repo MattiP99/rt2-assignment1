@@ -107,33 +107,40 @@ When the first modality is running and a goal is received, this node uses the se
 thanks to the done_cb(status, result) function I could manage the result of the goal achievement. Here's the done_cb(status, result) code:
 
 def done_cb(status, result):
+
 	# Function called after goal was processed. It is used to notify the client on the current status of every goal in the system.
 	global client
 	global achieved
 	global goal_cont
 	goal_cont += 1 # Increment goal counter
 	if status == 2:
+	
 		print(bcolors.FAIL + "The goal received a cancel request after it started executing. Execution terminated." + bcolors.ENDC)
 		cont = 1
 		return
 	if status == 3:
+	
 		print(bcolors.OKGREEN + bcolors.UNDERLINE + bcolors.BOLD + "Goal successfully achieved" + bcolors.ENDC)
 		cont = 1
 		achieved = True
 		return
 	if status == 4:
+	
 		print(bcolors.FAIL + "Timeout expired, the desired poition is not reachable. Goal aborted." + bcolors.ENDC)
 		cont = 1
 		return
 	if status == 5:
+	
 		print(bcolors.FAIL + "The goal was rejected" + bcolors.ENDC)
 		cont = 1
 		return
 	if status == 6:
+	
 		print(bcolors.FAIL + "The goal received a cancel request after it started executing and has not yet completed execution"+ bcolors.ENDC)
 		cont = 1
 		return
 	if status == 8:
+	
 		print(bcolors.FAIL + "The goal received a cancel request before it started executing and was successfully cancelled."+ bcolors.ENDC)
 		cont = 1
 		return
@@ -143,10 +150,12 @@ A concept that I want to point out is the that the achievement of the goal impli
 This is a piece of code about the differentiation that I just pointed out:
 
 if flag == 0 and achieved == False: # If we are in Idle state but a goal was not achieved we need to cancel the goal
+
 		print("Modality 1 is currently in idle state\n")
 		client.cancel_goal() # Send a cancel request
 		flag = 1 # Ready to set a new goal if this modality is unlocked
 if achieved == True: # If a goal was achieved there's no need to cancel the goal
+
 		flag = 1
 		achieved = False
 
@@ -156,6 +165,7 @@ This node reads inputs from the keyboar and publishes a Twist() message to the c
 
 #### Instructions
 Moving around:
+
 				u i o
 				j k l
 				m , .
@@ -211,6 +221,7 @@ Here's a picture that represent how I sliced the laser scan span:
 
 
 def clbk_laser(msg):
+		
 		# Callback for detecting obstacles from laser scan
 		global ok_left		#This variable is set to True when there are no obstacles on the left of the robot
 		global ok_right		#This variable is set to True when there are no obstacles on the right of the robot
@@ -248,6 +259,7 @@ and finally I popped the dictionary indexes that would have moved the robot towa
 # Function that removes commands from the dictionary when an obstacle is detected. 
 #In this way, when an obstacle is detected, the movement in that direction is disabled
 def pop_dict(dictionary):
+		
 		global ok_left
 		global ok_right
 		global ok_straight
