@@ -11,16 +11,16 @@ In this project, a robot moves in an environment initially unknown to it. Thanks
     
 ##INSTALLING AND RUNNING
 ---------------------------------------------------------------------------------------------------------
-Installing and running
+##Installing and running
 
 Here's some useful informations regarding how to the nodes and the simulation environment. First of all, xterm, a standard terminal emulator, is needed. You can install xterm by entering the following commands in the terminal:
 
-sudo apt update
-sudo apt-get install xterm
+	sudo apt update
+	sudo apt-get install xterm
 
 I created a launch file in the launch directory that executes all the necessary nodes and the simulation environment. You can run the programs by entering the following command:
 
-roslaunch final_assignment launchAll.launch 
+	roslaunch final_assignment launchAll.launch 
 
 The three modalities and the UI nodes will run on different xterm terminals. You can control the robot with the three different modalities by reerring to each xterm terminal that will appear after the launch file execution.
 
@@ -59,7 +59,7 @@ The User Interface node handles the user keyboard inputs. Here's a legend of the
 def interpreter():
 	#Function that receives inputs and sets all the ROS parameters
 	
-	command = input(bcolors.HEADER + 'Choose a modality: \n' + bcolors.ENDC) # Stores the input key
+ 	command = input(bcolors.HEADER + 'Choose a modality: \n' + bcolors.ENDC) # Stores the input key
 	
 	if command == "0":
 		rospy.set_param('active', 0) # if the active parameter is 0 the current goal is canceled
@@ -94,14 +94,17 @@ This node makes the robot autonomously reach a x,y position inserted by the user
 
 When the first modality is running and a goal is received, this node uses the send_goal(goal_msg, done_cb(), active_cb(), feedback_cb()) function for asking the action server to compute the path planning for the desired goal.
 
-    goal_msg is a MoveBaseGoal() action message containing all the information about the desired goal (i.e. x, y coordinates, referencing frame, etc... )
-    done_cb(status, result) is a callback function called after the execution of the action server. It gives the client information about the termination of the goal process. In particular, this callback function returns a value that is stored in am int variable that I called status. Depending on the value of this variable the client knows the status of the goal processing.
-    active_cb() is a callback funtion called before the execution of the action server. I used this callback funtion in order to take into account the number of processed goals.
-    feedback_cb(feedback) is a callback funtion called durning the execution of the action server. It returns feedbacks about the goal processing.
+    - goal_msg is a MoveBaseGoal() action message containing all the information about the desired goal (i.e. x, y coordinates, referencing frame, etc... )
+    
+    - done_cb(status, result) is a callback function called after the execution of the action server. It gives the client information about the termination of the 
+    		goal process. In particular, this callback function returns a value that is stored in am int variable that I called status. Depending on the value of 		      this variable the client knows the status of the goal processing.
+    - active_cb() is a callback funtion called before the execution of the action server. I used this callback funtion in order to take into account the number of 			processed goals.
+    
+    - feedback_cb(feedback) is a callback funtion called durning the execution of the action server. It returns feedbacks about the goal processing.
 
 
 
-hanks to the done_cb(status, result) function I could manage the result of the goal achievement. Here's the done_cb(status, result) code:
+thanks to the done_cb(status, result) function I could manage the result of the goal achievement. Here's the done_cb(status, result) code:
 
 def done_cb(status, result):
 	# Function called after goal was processed. It is used to notify the client on the current status of every goal in the system.
