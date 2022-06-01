@@ -220,6 +220,7 @@ Here's a picture that represent how I sliced the laser scan span:
 
 
 
+<img width="576" alt="Image_robot_directions" src="https://user-images.githubusercontent.com/92534255/171435872-3c337dd5-04c6-4b42-a614-35c03ced1f7b.png">
 
 
 
@@ -255,6 +256,7 @@ Then, I considered all the eight combination that the robot could face:
 
 
 
+<img width="576" alt="Image_robot_obstacles" src="https://user-images.githubusercontent.com/92534255/171437424-1f9a133f-3b92-4e39-b34e-1b6ff78c54fd.png">
 
 
 
