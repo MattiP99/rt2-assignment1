@@ -46,7 +46,7 @@ The final map, visible on Rviz is as follows:
 
 ## Project structure
 ------------------------------------------------------------------------------------------------------
-### ## Jupyter Notebook
+### Jupyter Notebook
 
 A Notebook is provided to handle the three modalities of interaction following reported.
 
