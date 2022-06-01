@@ -53,7 +53,7 @@ Firstly, run the launch file on your machine, then open the notebook ($jupyter n
 
 It provides:
 
-	-	Three buttons for chosing the right modality of interaction
+	-	Three buttons for choosing the right modality of interaction
 	-	A plot representing the laser scanner
 	-	A plot representing the the robot position in the environment
 	-	An output for counting the number of targets reached
