@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['readme_47',['ReadMe',['../md__read_me.html',1,'']]],
-  ['readme_2emd_48',['ReadMe.md',['../_read_me_8md.html',1,'']]],
-  ['run_49',['run',['../classmy__teleop__twist__keyboard_1_1_publish_thread.html#a93b860e2c01e5b015dc49463736c110b',1,'my_teleop_twist_keyboard.PublishThread.run()'],['../classteleop__avoid_1_1_publish_thread.html#a8b644ef2a17ba7e15a8aeef408ec709c',1,'teleop_avoid.PublishThread.run()']]]
+  ['pop_5fdict_59',['pop_dict',['../namespaceteleop__avoid.html#a580cbf1dac188a7b7c099b3de9e09d84',1,'teleop_avoid']]],
+  ['project_60',['project',['../namespaceconf.html#a45653c983098153b78e33600e39230eb',1,'conf']]],
+  ['publisher_61',['publisher',['../classmy__teleop__twist__keyboard_1_1_publish_thread.html#aec35dcce150b30a9b19e92ed8986ce19',1,'my_teleop_twist_keyboard.PublishThread.publisher()'],['../classteleop__avoid_1_1_publish_thread.html#adce9f8330ad073614ca5306635a27447',1,'teleop_avoid.PublishThread.publisher()']]],
+  ['publishthread_62',['PublishThread',['../classmy__teleop__twist__keyboard_1_1_publish_thread.html',1,'my_teleop_twist_keyboard.PublishThread'],['../classteleop__avoid_1_1_publish_thread.html',1,'teleop_avoid.PublishThread']]],
+  ['purple_63',['PURPLE',['../classgo__to__desired__pos_1_1bcolors.html#ade795088e1e08864287078e5aed53ef4',1,'go_to_desired_pos.bcolors.PURPLE()'],['../classmy__teleop__twist__keyboard_1_1bcolors.html#a364a42df368cf5ef2ad685c9f190664e',1,'my_teleop_twist_keyboard.bcolors.PURPLE()'],['../classteleop__avoid_1_1bcolors.html#af6c6631f53350b7ec54ffd989629a5d6',1,'teleop_avoid.bcolors.PURPLE()'],['../class_u_i_1_1bcolors.html#ac0e7f2f88b30df892f610f5a02d685e4',1,'UI.bcolors.PURPLE()']]]
 ];

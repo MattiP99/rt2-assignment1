@@ -16,14 +16,14 @@ ROS parameters:
 These ROS parameters too and they are set by the :mod:`UI` node.
 """
 
-# IMPORTS
+
 import rospy
 import actionlib
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from tf import transformations
 from std_srvs.srv import *
 
-#COLORS 
+
 class bcolors:
 	"""
 	This class is used for printing colors on the temrinal
@@ -41,7 +41,7 @@ class bcolors:
 	ORANGE = '\033[33m' 
 	PURPLE  = '\033[35m'
 
-# Explanatory message
+
 msg = """ 
 """ + bcolors.BOLD + """
 This node makes the robot autonomously reach a x,y position inserted by the user.
@@ -107,9 +107,9 @@ def action_client():
 	global goal_msg
 	global client
 
-	client.wait_for_server()	# Waits until we are connected to the action server
+	client.wait_for_server()	
 
-	# Setting some goal's fields
+	
 	goal_msg.target_pose.header.frame_id = 'map'			
 	goal_msg.target_pose.header.stamp = rospy.Time.now()	
 	goal_msg.target_pose.pose.orientation.w = 1				
@@ -132,7 +132,7 @@ def done_cb(status, result):
 	global achieved
 	global goal_cont
 
-	goal_cont += 1 # Increment goal counter
+	goal_cont += 1 
 
 	if status == 2:
 		print(bcolors.FAIL + "The goal received a cancel request after it started executing. Execution terminated." + bcolors.ENDC)
@@ -177,7 +177,7 @@ def feedback_cb(feedback):
 	No Returns.  
 	"""
 	global cont
-	cont += 1	# Increment index
+	cont += 1	
 	print(str(cont) + ")\tFeedback from goal number " + str(goal_cont) + " received!")
 
 def set_goal(x, y):
@@ -218,31 +218,31 @@ def main():
 	global desired_position_y
 	global active_
 
-	rospy.init_node('go_to_desired_pos') # Init node
-	action_client() # Setting some goals' parameter
-	flag=0 # Flag used in order to know if the previous state was Idle or not
+	rospy.init_node('go_to_desired_pos') 
+	action_client() 
+	flag=0 
 	desired_position_x = rospy.get_param('/des_pos_x')
 	desired_position_y = rospy.get_param('/des_pos_y')
 	active_ = rospy.get_param('/active')	
 	print(msg) 
 	while (1):
 		
-		update_variables() # Update Ros parameters
+		update_variables() 
 
-		if active_==1: # If the current modality is active the code can be executed
+		if active_==1: 
 			
-			if flag == 1:	# If the prevoius state was Idle then we can set a new goal
+			if flag == 1:	
 				print(bcolors.OKGREEN + bcolors.UNDERLINE + "The robot is moving towards your desired target" + bcolors.ENDC)
-				set_goal(desired_position_x, desired_position_y)	# Set a new goal
-				flag = 0	# If this modality will be blocked, then must be put in Idle state
+				set_goal(desired_position_x, desired_position_y)	
+				flag = 0	
 
 		else:
-			if flag == 0 and achieved == False: # If we are in Idle state but a goal was not achieved we need to cancel the goal
+			if flag == 0 and achieved == False: 
 				print(bcolors.OKBLUE + "Modality 1 is currently in idle state\n" + bcolors.ENDC)
-				client.cancel_goal()	# Send a cancel request
-				flag = 1	# Ready to set a new goal if this modality is unlocked
+				client.cancel_goal()	
+				flag = 1	
 
-			if achieved == True: # If a goal was achieved there's no need to cancel the goal
+			if achieved == True: 
 				flag = 1
 				achieved = False
 

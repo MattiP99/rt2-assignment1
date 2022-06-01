@@ -15,7 +15,7 @@ Messages of type Twist() are published to the '/cmd_vel' topic.
 The functionality is quite similar to the teleop_twist_keyboad's one. 
 """
 
-# IMPORTS
+
 from __future__ import print_function
 import threading
 import roslib; roslib.load_manifest('teleop_twist_keyboard')
@@ -23,7 +23,7 @@ import rospy
 from geometry_msgs.msg import Twist
 import sys, select, termios, tty
 
- # COLORS
+
 class bcolors:
     """
     This class is used for printing colors on the terminal.
@@ -40,7 +40,7 @@ class bcolors:
     ORANGE = '\033[33m' 
     PURPLE  = '\033[35m'
 
-# Instructions message
+
 msg = """ 
 """ + bcolors.BOLD +"""
 Reading from the keyboard and Publishing to Twist!
@@ -121,8 +121,7 @@ class PublishThread(threading.Thread):
         self.condition = threading.Condition()
         self.done = False
 
-        # Set timeout to None if rate is 0 (causes new_message to wait forever
-        # for new data to publish)
+       
         if rate != 0.0:
             self.timeout = 1.0 / rate
         else:
@@ -149,7 +148,7 @@ class PublishThread(threading.Thread):
         self.th = th
         self.speed = speed
         self.turn = turn
-        # Notify publish thread that we have a new message.
+       
         self.condition.notify()
         self.condition.release()
 
@@ -160,7 +159,7 @@ class PublishThread(threading.Thread):
 
     
     def my_stop(self):
-        # Class funtion for stopping the robot movement 
+        
         twist = Twist()
         twist.linear.x = 0
         twist.linear.y = 0
@@ -168,17 +167,17 @@ class PublishThread(threading.Thread):
         twist.angular.x = 0
         twist.angular.y = 0
         twist.angular.z = 0
-        # Publish.
+       
         self.publisher.publish(twist)
 
     def run(self):
         twist = Twist()
         while not self.done:
             self.condition.acquire()
-            # Wait for a new message or timeout.
+            
             self.condition.wait(self.timeout)
 
-            # Copy state into twist message.
+           
             twist.linear.x = self.x * self.speed
             twist.linear.y = self.y * self.speed
             twist.linear.z = self.z * self.speed
@@ -188,25 +187,25 @@ class PublishThread(threading.Thread):
 
             self.condition.release()
 
-            # Publish.
+            
             self.publisher.publish(twist)
 
-        # Publish stop message when thread exits.
+        
         twist.linear.x = 0
         twist.linear.y = 0
         twist.linear.z = 0
         twist.angular.x = 0
         twist.angular.y = 0
         twist.angular.z = 0
-        self.publisher.publish(twist) # Publishes the twist message 
+        self.publisher.publish(twist) 
 
 
 def getKey(key_timeout): 
-    settings = termios.tcgetattr(sys.stdin) # Settings for avoid printing commands on terminal
+    settings = termios.tcgetattr(sys.stdin) 
     tty.setraw(sys.stdin.fileno())
     rlist, _, _ = select.select([sys.stdin], [], [], key_timeout)
     if rlist:
-        key = sys.stdin.read(1) # Get input key from standard input
+        key = sys.stdin.read(1) 
     else:
         key = ''
     termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
@@ -225,15 +224,15 @@ def main():
     """
     
 
-    rospy.init_node('my_teleop_twist_kb')   # Init node
-    active_=rospy.get_param("/active")      # We want a local variable that is equal to the ROS parameter   
-    flag = 1                                # Useful flag for determine an idle status
+    rospy.init_node('my_teleop_twist_kb')  
+    active_=rospy.get_param("/active")       
+    flag = 1                               
     
     speed = rospy.get_param("~speed", 0.5)
     turn = rospy.get_param("~turn", 1.0)
     repeat = rospy.get_param("~repeat_rate", 0.0)
 
-    # Timeout set at 0.1 seconds. That means that the user needs to keep the key pushed for moving the robot. 
+    
     key_timeout = rospy.get_param("~key_timeout", 0.1) 
 
     if key_timeout == 0.0:
@@ -256,11 +255,10 @@ def main():
 
     while(1):
 
-        active_=rospy.get_param("/active") # Update the system status
-
-        if active_ == 2: # If this modality is active
-            key = getKey(key_timeout) #Get the input command
-            if key in moveBindings.keys(): # If the input command is in the dictionary set the x, y, z, th variables
+        active_=rospy.get_param("/active") 
+        if active_ == 2: 
+            key = getKey(key_timeout) 
+            if key in moveBindings.keys(): 
                 x = moveBindings[key][0]
                 y = moveBindings[key][1]
                 z = moveBindings[key][2]
@@ -274,8 +272,7 @@ def main():
                     print(msg)
                 status = (status + 1) % 15
             else:
-                # Skip updating cmd_vel if key timeout and robot already
-                # stopped.
+                
                 if key == '' and x == 0 and y == 0 and z == 0 and th == 0:
                     continue
                 x = 0
@@ -289,7 +286,7 @@ def main():
             flag = 1
 
         else:
-            if flag == 1: # Put the current modality in Idle state
+            if flag == 1: 
                 pub_thread.my_stop() 
                 print(bcolors.OKGREEN + bcolors.BOLD + "Modality 2 is currently in idle state\n" + bcolors.ENDC)
             flag = 0

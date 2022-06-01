@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="md__read_me" kind="page">
+    <compoundname>md_ReadMe</compoundname>
+    <title>ReadMe</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Author: Mattia Piras</para>
+<sect2 id="md__read_me_1autotoc_md0">
+<title># First assignment for Research Track 2: Course of Robotics Engineering Unige</title>
+<para>In this project, a robot moves in an environment initially unknown to it. Thanks to laser scanners mounted on board the robot is able to build a map of the environment and move without encountering obstacles. It is required that the robot can move in 3 different modes: <verbatim>- setting the coordinates of a goal to be achieved and the robot would have to dynamically calculate a path to reach it
+- controlling it via keyboard
+- controlling it via keyboard with assistance to avoid obstacles
+</verbatim></para>
+</sect2>
+<sect2 id="md__read_me_1autotoc_md1">
+<title>## INSTALLING AND RUNNING</title>
+</sect2>
+<sect2 id="md__read_me_1autotoc_md2">
+<title>Installing and running</title>
+<para>Here&apos;s some useful informations regarding how to the nodes and the simulation environment. First of all, xterm, a standard terminal emulator, is needed. You can install xterm by entering the following commands in the terminal: <verbatim>sudo apt update
+sudo apt-get install xterm
+</verbatim></para>
+<para>I created a launch file in the launch directory that executes all the necessary nodes and the simulation environment. You can run the programs by entering the following command: <verbatim>roslaunch final_assignment launchAll.launch 
+</verbatim></para>
+<para>The three modalities and the <ref refid="namespace_u_i" kindref="compound">UI</ref> nodes will run on different xterm terminals. You can control the robot with the three different modalities by reerring to each xterm terminal that will appear after the launch file execution.</para>
+<para>If any of the three node terminates, the launch file will terminates all the nodes.</para>
+</sect2>
+<sect2 id="md__read_me_1autotoc_md3">
+<title>## Environment and Mapping</title>
+<para>The robot moves in the environment in the figure (Gazebo view):</para>
+<para><image type="html" name="155940743-e88f5ab1-e097-4025-a3a5-460ad08b761e.png" inline="yes"></image>
+</para>
+<para>Initially the robot does not have a map of the surrounding environment, but can build it thanks to the laser scanner it is equipped with and thanks to the gmapping package.</para>
+<para>The final map, visible on Rviz is as follows:</para>
+<para><image type="html" name="155940790-33f4e580-fc23-494b-9d37-f9bdb1d97679.png" inline="yes"></image>
+</para>
+</sect2>
+<sect2 id="md__read_me_1autotoc_md4">
+<title>## Project structure</title>
+<sect3 id="md__read_me_1autotoc_md5">
+<title>User Interface Node</title>
+<para>The User Interface node handles the user keyboard inputs. Here&apos;s a legend of the allowed commands: <verbatim>&apos;1&apos; keyboard key is used for choosing the autonomously reaching modality;
+&apos;2&apos; keyboard key is used for the free keyboard driving modality;
+&apos;3&apos; keyboard key is used for the free keyboard driving modality with a collision avoidance algorithm;
+&apos;4&apos; keyboard key is used for quitting the application and terminates all nodes; This node is very simply designed. Essentially, a function called interpreter() is looped inside a while not rospy.is_shutdown(): loop. This function gets the keyboard user input and changes the ROS parameter active depending on which modality was chosen. Here&apos;s the interpreter() code:
+</verbatim></para>
+<para>def interpreter(): #Function that receives inputs and sets all the ROS parameters</para>
+<para>command = input(bcolors.HEADER + &apos;Choose a modality: <linebreak/>
+&apos; + bcolors.ENDC) # Stores the input key</para>
+<para>if command == &quot;0&quot;: rospy.set_param(&apos;active&apos;, 0) # if the active parameter is 0 the current goal is canceled print(bcolors.OKGREEN + &quot;No modality is active, please choose one for controlling the robot&quot; + bcolors.ENDC) # Sysytem in idle state active_=rospy.get_param(&quot;/active&quot;) elif command == &quot;1&quot;: # Modality one chosen rospy.set_param(&apos;active&apos;, 0) # Useful for changing goal active_=rospy.get_param(&quot;/active&quot;) </para>
+</sect3>
+</sect2>
+<sect1 id="md__read_me_1autotoc_md6">
+<title>Receive the desired cooridnates as input</title>
+<para>des_x_input = float(input(bcolors.UNDERLINE + bcolors.OKBLUE +&quot;Insert the desired x position: &quot; + bcolors.ENDC)) des_y_input = float(input(bcolors.UNDERLINE + bcolors.OKBLUE +&quot;Insert the desired y position: &quot; + bcolors.ENDC)) rospy.set_param(&apos;des_pos_x&apos;, des_x_input) # Update the desired X coordinate rospy.set_param(&apos;des_pos_y&apos;, des_y_input) # Update the desired Y coordinate rospy.set_param(&apos;active&apos;, 1) # Modality 1 active elif command == &quot;2&quot;: # Modality two chosen rospy.set_param(&apos;active&apos;, 2) # Modality two active print(bcolors.OKGREEN + bcolors.UNDERLINE + &quot;Modality 2 is active.&quot; + bcolors.ENDC) print(bcolors.BOLD + bcolors.HEADER + &quot;Use the &apos;my_teleop_twist_keyboard&apos; xterm terminal to control the robot&quot; + bcolors.ENDC) active_=rospy.get_param(&quot;/active&quot;) elif command == &quot;3&quot;: # Modality three chosen rospy.set_param(&apos;active&apos;, 3) # # Modality three active active_=rospy.get_param(&quot;/active&quot;) elif command == &quot;4&quot;: # Exit command print(bcolors.WARNING + bcolors.BOLD + &quot;Exiting...&quot; + bcolors.ENDC) os.kill(os.getpid(), signal.SIGKILL) # Kill the current process else: print(bcolors.FAIL + bcolors.BOLD + &quot;Wrong key! Use the shown commands &quot; + bcolors.ENDC)</para>
+<sect3 id="md__read_me_1autotoc_md7">
+<title>Autonomously reaching node (First Modality)</title>
+<para>This node makes the robot autonomously reach a x,y position inserted by the user. The robot can reach the user&apos;s x,y coordinates thanks to the &apos;move_base&apos; action server. The robot is going to plan the path through the Dijkstra&apos;s algorithm. When the first modality is selected, the UI.py node sets the active ROS parameter to 1 letting the first modality&apos;s loop to run all the necessary code for sending the desired goal. The desired x, y coordinates are ROS parameters too and they are set by the UI.py node.</para>
+<para>When the first modality is running and a goal is received, this node uses the send_goal(goal_msg, done_cb(), active_cb(), feedback_cb()) function for asking the action server to compute the path planning for the desired goal. <verbatim>- goal_msg is a MoveBaseGoal() action message containing all the information about the desired goal (i.e. x, y coordinates, referencing frame, etc... )
+
+- done_cb(status, result) is a callback function called after the execution of the action server. It gives the client information about the termination of the 
+        goal process. In particular, this callback function returns a value that is stored in am int variable that I called status. Depending on the value of             this variable the client knows the status of the goal processing.
+- active_cb() is a callback funtion called before the execution of the action server. I used this callback funtion in order to take into account the number of          processed goals.
+
+- feedback_cb(feedback) is a callback funtion called durning the execution of the action server. It returns feedbacks about the goal processing.
+</verbatim></para>
+<para>thanks to the done_cb(status, result) function I could manage the result of the goal achievement. Here&apos;s the done_cb(status, result) code:</para>
+<para>def done_cb(status, result): <verbatim># Function called after goal was processed. It is used to notify the client on the current status of every goal in the system.
+global client
+global achieved
+global goal_cont
+goal_cont += 1 # Increment goal counter
+if status == 2:
+
+    print(bcolors.FAIL + &quot;The goal received a cancel request after it started executing. Execution terminated.&quot; + bcolors.ENDC)
+    cont = 1
+    return
+if status == 3:
+
+    print(bcolors.OKGREEN + bcolors.UNDERLINE + bcolors.BOLD + &quot;Goal successfully achieved&quot; + bcolors.ENDC)
+    cont = 1
+    achieved = True
+    return
+if status == 4:
+
+    print(bcolors.FAIL + &quot;Timeout expired, the desired poition is not reachable. Goal aborted.&quot; + bcolors.ENDC)
+    cont = 1
+    return
+if status == 5:
+
+    print(bcolors.FAIL + &quot;The goal was rejected&quot; + bcolors.ENDC)
+    cont = 1
+    return
+if status == 6:
+
+    print(bcolors.FAIL + &quot;The goal received a cancel request after it started executing and has not yet completed execution&quot;+ bcolors.ENDC)
+    cont = 1
+    return
+if status == 8:
+
+    print(bcolors.FAIL + &quot;The goal received a cancel request before it started executing and was successfully cancelled.&quot;+ bcolors.ENDC)
+    cont = 1
+    return
+</verbatim></para>
+<para>A concept that I want to point out is the that the achievement of the goal implies a cancel of such goal. So, I had to use a flag (bool achieved) to differentiate the case in which a goal was achieved (in this case the cacel request of an already canceled goal may cause an error, so I avoided to send the cancel request to the action server) and the case in which the user decides to send a cancel request before the goal achievement (in this case we must send a cancel request to the server).</para>
+<para>This is a piece of code about the differentiation that I just pointed out:</para>
+<para>if flag == 0 and achieved == False: # If we are in Idle state but a goal was not achieved we need to cancel the goal <verbatim>    print(&quot;Modality 1 is currently in idle state\n&quot;)
+    client.cancel_goal() # Send a cancel request
+    flag = 1 # Ready to set a new goal if this modality is unlocked
+</verbatim> if achieved == True: # If a goal was achieved there&apos;s no need to cancel the goal <verbatim>    flag = 1
+    achieved = False
+</verbatim></para>
+</sect3>
+<sect3 id="md__read_me_1autotoc_md8">
+<title>Free drive with keyboard node (Second Modality)</title>
+<para>This node reads inputs from the keyboar and publishes a Twist() message to the cmd_vel topic. Basically I relied on the teleop_twist_keyboard code. So, the functionality is the same:</para>
+<sect4 id="md__read_me_1autotoc_md9">
+<title>Instructions</title>
+<para>Moving around: <verbatim>            u i o
+            j k l
+            m , .
+</verbatim> </para>
+</sect4>
+</sect3>
+<sect2 id="md__read_me_1autotoc_md10">
+<title>For Holonomic mode (strafing), hold down the shift key:</title>
+<para><verbatim>            U I O
+            J K L
+            M &lt; &gt;
+</verbatim></para>
+<para>t : up (+z) b : down (-z) anything else : stop</para>
+<para>q/z : increase/decrease max speeds by 10%</para>
+<para>w/x : increase/decrease only linear speed by 10%</para>
+<para>e/c : increase/decrease only angular speed by 10%</para>
+<para>I modified some lines of code in order to adapt the process on my needs. This modality is a total free driving algorithm, that means that the robot can obviously bump into the obstacles. The main changes I&apos;ve made from the teleop_twist_keyboard node are: <verbatim>Insertion of an if(active == 2) statement in order to block the code when another modality is running.
+The keys now must be kept pressed in order to move the robot. I did this by setting the key_timeout variable to 0.1. Such variable was the select() timeout. That means that the select() function waits 0.1 seconds for new inputs at every loop.
+</verbatim></para>
+<sect3 id="md__read_me_1autotoc_md11">
+<title>Free drive with keyboard and collision avoidance algorithm node (Third Modality)</title>
+<para>This node reads inputs from the keyboard and publishes a Twist() message to the /cmd_vel topic. Basically I relied on the teleop_twist_keyboard code and therefore the functionality is quite the same:</para>
+<sect4 id="md__read_me_1autotoc_md12">
+<title>Instructions</title>
+</sect4>
+</sect3>
+</sect2>
+<sect2 id="md__read_me_1autotoc_md13">
+<title>Reading from the keyboard and Publishing to Twist!</title>
+<para>[i] go straight [j] turn left [l] turn right [k] go backwards</para>
+<para>[q]/[z] : increase/decrease max speeds by 10% [w]/[x] : increase/decrease only linear speed by 10% [e]/[c] : increase/decrease only angular speed by 10%</para>
+<para>I modified some lines of code in order to adapt the process on my needs. This algorithm is based on the modification of a Dictionary. Dictionary is adata type similar to a list and it contains a collection of objects. These objects are idexed with the key/value pair. In this case the contained value are the linear and angular velocity combinations that the robot should assume after that an input occurrs. Such collision avoidance algorithm just uses the.pop(key) method that removes and returns the element idexed by key of the dictionary. In this way, when the distance between the robot and the obstacle is less than a threshold value, a command is disabled just by popping such index from the dictionary. Moreover, by this way the robot cannot move in the direction in which the obstacle is detected. For implementing such algorithm, I needed the subscription to the /scan topic. This subscription allowed me to detect the obstacles in the simulation environment but also their position with respect to the robot by slicing the LaserScan array in three parts: front, left and right direction:</para>
+<para>Here&apos;s a picture that represent how I sliced the laser scan span:</para>
+<para><image type="html" name="170269974-0002f9bb-fc4a-43bf-9298-6992bd1d8cfb.png" inline="yes"></image>
+</para>
+<para>def clbk_laser(msg): <verbatim>    # Callback for detecting obstacles from laser scan
+    global ok_left      #This variable is set to True when there are no obstacles on the left of the robot
+    global ok_right     #This variable is set to True when there are no obstacles on the right of the robot
+    global ok_straight  #This variable is set to True when there are no obstacles in front of the robot
+
+    right = min(min(msg.ranges[0:143]), 1) # Detects obstacles on the right of the robot
+    front = min(min(msg.ranges[288:431]), 1) # Detects obstacles in front of the robot
+    left = min(min(msg.ranges[576:719]), 1) # Detects obstacles on the left of the robot
+
+    if right != 1.0: # No obstacles detected on the right at a distance less than 1 meter
+            ok_right =False
+    else: # Obstacle detected on the right of the robot
+            ok_right =True
+    if front != 1.0: # No obstacles detected in the front direction at a distance less than 1 meter
+            ok_straight =False
+    else: # Obstacle detected in front of the robot
+            ok_straight =True
+    if left != 1.0: # No obstacles detected on the left at a distance less than 1 meter
+            ok_left =False
+    else: # Obstacle detected on the left of the robot
+            ok_left =True
+</verbatim></para>
+<para>Then, I considered all the eight combination that the robot could face:</para>
+<para><image type="html" name="170270004-a0759888-8edd-42cd-8b1b-75b0e55380d7.png" inline="yes"></image>
+</para>
+<para>and finally I popped the dictionary indexes that would have moved the robot towards the detected obstacle:</para>
+</sect2>
+</sect1>
+<sect1 id="md__read_me_1autotoc_md14">
+<title>Function that removes commands from the dictionary when an obstacle is detected.</title>
+<para>#In this way, when an obstacle is detected, the movement in that direction is disabled</para>
+<para>def pop_dict(dictionary): <verbatim>    global ok_left
+    global ok_right
+    global ok_straight
+    # All the cases the robot could face
+    if not ok_straight and not ok_right and not ok_left: # Obstacles in every direction
+            # Disable all the three commands
+            dictionary.pop(&apos;i&apos;) # Disable the front movement
+            dictionary.pop(&apos;j&apos;) # Disable the left turn movement
+            dictionary.pop(&apos;l&apos;) # Disable the right turn movement
+    elif not ok_left and not ok_straight and ok_right: # Obstacles on the left and in the front direction, so right direction is free
+            dictionary.pop(&apos;i&apos;) # Disable the front movement
+            dictionary.pop(&apos;j&apos;) # Disable the left turn movement
+    elif ok_left and not ok_straight and not ok_right: # Obstacles on the right and in the front direction, so left direction is free
+            dictionary.pop(&apos;i&apos;) # Disable the front movement
+            dictionary.pop(&apos;l&apos;) # Disable the right turn movement
+    elif not ok_left and ok_straight and not ok_right: # Obstacles on the right and on the left, so the front direction is free
+            dictionary.pop(&apos;l&apos;) # Disable the right turn movement
+            dictionary.pop(&apos;j&apos;) # Disable the left turn movement
+    elif ok_left and not ok_straight and ok_right: # Obstacles only in the front direction, so the left and right directions are free
+            dictionary.pop(&apos;i&apos;) # Disable the front movement
+    elif not ok_left and ok_straight and ok_right: # Obstacles only in the left direction, so the front and right directions are free
+            dictionary.pop(&apos;j&apos;) # Disable the left turn movement
+    elif ok_left and ok_straight and not ok_right: # Obstacles only in the right direction, so the front and left directions are free
+            dictionary.pop(&apos;l&apos;) # Disable the right turn movement
+</verbatim> </para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -13,12 +13,12 @@ ROS parameters:
 	3.	"des_pos_y": (type: double) parameter for the desired Y coordinate 
 """
 
-# IMPORTS
+
 import rospy
 import os
 import signal
 
-# COLORS
+
 class bcolors:
 	"""
 	This class is used for  printing colors on the terminal
@@ -46,13 +46,13 @@ ascii_art_message = """ """ + bcolors.BOLD + bcolors.HEADER + """
 			(_______)\_______/
 """ + bcolors.ENDC +""" """
 
-# Intro message
+
 intro = """ 
 """ + bcolors.HEADER + bcolors.BOLD + """
 Hi! This is your User Interface """ + bcolors.ENDC + bcolors.UNDERLINE + """
 You can move the robot through three different modalities:
 """
-# Menu message showing the three modalities
+
 menu_msg = """
 """ + bcolors.ENDC + """
 ----------------------------------------------------------------
@@ -89,50 +89,49 @@ def interpreter():
 		flag = False
 
 
-	command = input(bcolors.HEADER + 'Choose a modality: \n' + bcolors.ENDC) # Stores the input key
+	command = input(bcolors.HEADER + 'Choose a modality: \n' + bcolors.ENDC) 
 
 
 	if command == "0":
-		rospy.set_param('active', 0)	# if the active parameter is 0 the current goal is canceled
-		print(bcolors.OKGREEN + "No modality is active, please choose one for controlling the robot" + bcolors.ENDC) # Sysytem in idle state
+		rospy.set_param('active', 0)	
+		print(bcolors.OKGREEN + "No modality is active, please choose one for controlling the robot" + bcolors.ENDC) 
 		active_=rospy.get_param("/active")
 
-	elif command == "1": # Modality one chosen
+	elif command == "1": 
 
-		rospy.set_param('active', 0) # Useful for changing goal 
+		rospy.set_param('active', 0) 
 		print(bcolors.OKGREEN + bcolors.UNDERLINE + "Modality 1 is active.")
 		active_=rospy.get_param("/active")
 		print(bcolors.OKBLUE + bcolors.BOLD + "Where do you want the robot to go?" + bcolors.ENDC)
 
-		# Receive the desired cooridnates as input
+		
 		des_x_input = float(input(bcolors.UNDERLINE + bcolors.OKBLUE +"Insert the desired x position: " + bcolors.ENDC))
 		des_y_input = float(input(bcolors.UNDERLINE + bcolors.OKBLUE +"Insert the desired y position: " + bcolors.ENDC))
 
 		print(bcolors.OKGREEN + bcolors.UNDERLINE + "Okay, let's reach the psotion x= " + str(des_x_input) + " y= " + str(des_y_input) + bcolors.ENDC)
 		print(bcolors.OKGREEN + bcolors.UNDERLINE + "\nThe robot is moving towards your desired target" + bcolors.ENDC)	
 
-		rospy.set_param('des_pos_x', des_x_input) # Update the desired X coordinate
-		rospy.set_param('des_pos_y', des_y_input) # Update the desired Y coordinate
-		rospy.set_param('active', 1) # Modality 1 active
-
+		rospy.set_param('des_pos_x', des_x_input) 
+		rospy.set_param('des_pos_y', des_y_input) 
+		rospy.set_param('active', 1) 
 		flag=True
 
-	elif command == "2": # Modality two chosen
-		rospy.set_param('active', 2) # Modality two active
+	elif command == "2": 
+		rospy.set_param('active', 2)
 		print(bcolors.OKGREEN + bcolors.UNDERLINE + "Modality 2 is active." + bcolors.ENDC)
 		print(bcolors.BOLD + bcolors.HEADER + "Use the 'my_teleop_twist_keyboard' xterm terminal to control the robot" + bcolors.ENDC)
 		active_=rospy.get_param("/active")
 		
-	elif command == "3": # Modality three chosen
-		rospy.set_param('active', 3) # # Modality three active
+	elif command == "3": 
+		rospy.set_param('active', 3) 
 		print(bcolors.OKGREEN + bcolors.UNDERLINE + "Modality 3 is active." + bcolors.ENDC)
 		print(bcolors.BOLD + bcolors.OKBLUE + "Use the 'teleop_avoid' xterm terminal to control the robot" + bcolors.ENDC)
 		active_=rospy.get_param("/active")
 
-	elif command == "4": # Exit command
+	elif command == "4": 
 
 		print(bcolors.WARNING + bcolors.BOLD + "Exiting..." + bcolors.ENDC)
-		os.kill(os.getpid(), signal.SIGKILL) # Kill the current process
+		os.kill(os.getpid(), signal.SIGKILL) 
 		
 
 		
