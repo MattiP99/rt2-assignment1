@@ -49,6 +49,14 @@ The final map, visible on Rviz is as follows:
 ### Jupyter Notebook
 
 A Notebook is provided to handle the three modalities of interaction following reported.
+Firstly, run the launch file on your machine, then open the notebook ($jupyter notebook --allow-root --ip 0.0.0.0) and run all the cells sequentially.
+
+It provides:
+
+	-	Three buttons for chosing the right modality of interaction
+	-	A plot representing the laser scanner
+	-	A plot representing the the robot position in the environment
+	-	An output for counting the number of targets reached
 
 
 ### User Interface Node
