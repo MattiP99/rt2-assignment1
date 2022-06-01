@@ -219,7 +219,7 @@ Here's a picture that represent how I sliced the laser scan span:
 
 
 
-<img width="278" alt="Immagine-laser-scanner" src="https://user-images.githubusercontent.com/92534255/170269974-0002f9bb-fc4a-43bf-9298-6992bd1d8cfb.png">
+
 
 
 
@@ -253,7 +253,7 @@ def clbk_laser(msg):
 Then, I considered all the eight combination that the robot could face:
 
 
-<img width="245" alt="Immagine-robot-possible-position" src="https://user-images.githubusercontent.com/92534255/170270004-a0759888-8edd-42cd-8b1b-75b0e55380d7.png">
+
 
 
 
